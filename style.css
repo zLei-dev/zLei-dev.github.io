@@ -1,0 +1,439 @@
+@font-face {
+    font-family: 'Consolas';
+    src: url(resources/fonts/Consolas.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url(resources/fonts/Proxima_Nova.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    display: flex;
+    overflow: hidden;
+}
+
+body {
+    font-family: Proxima Nova, sans-serif;
+    padding-top: 0;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    position: fixed;
+    padding-left: 4.5%;
+    flex-direction: column;
+    z-index: 2;
+}
+
+#logo {
+    width: 12.5rem;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+}
+
+#nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#nav-menu a {
+    display: block;
+}
+
+#nav-menu img {
+    width: 2.5rem;
+    transition: transform 0.2s ease;
+}
+
+#nav-menu img:hover {
+    transform: scale(1.2);
+}
+
+section {
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    height: 100vh;
+}
+
+/* Home Section */
+#home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+#home .content {
+    max-width: 800px;
+}
+
+#gray {
+    font-family: Proxima Nova;
+    font-style: italic;
+    font-size: 1rem;
+    color: #7a7a7a;
+}
+
+#description {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+h1 {
+    font-family: Consolas, sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+#b1,
+#b2 {
+    padding: 15px 20px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#b1 {
+    background-color: #c0d9d6;
+}
+
+#b2 {
+    background-color: #afa2cd;
+}
+
+#b1:hover,
+#b2:hover {
+    background-color: #373737;
+    transform: scale(1.08);
+}
+
+/* About Me Section */
+#aboutme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  /* Ensures they stack nicely */
+    text-align: center;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.aboutme {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+#gray {
+    font-family: Proxima Nova, sans-serif;
+    font-size: 1rem;
+    color: #7a7a7a;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-family: Consolas, sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+#description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.aboutme-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.profile-img {
+    flex: 1;
+    text-align: center;
+}
+
+.profile-img #pfp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.about-text {
+    flex: 2;
+    text-align: left;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.about-text p:first-child {
+    font-weight: bold;
+}
+
+/* Projects Section */
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem 0;
+}
+
+.game,
+.game2 {
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    background-color: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game:hover,
+.game2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#accentp {
+    color: #afa2cc;
+    margin-bottom: 1rem;
+}
+
+#description1 {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+#lg {
+    width: 3rem;
+    margin-top: 1rem;
+    transition: transform 0.3s ease;
+}
+
+#lg:hover {
+    transform: scale(1.1);
+}
+
+/* Socials Section */
+#socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  /* Ensures they stack nicely */
+    text-align: center;
+    width: 100%;
+}
+
+.slogos {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.slogos a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.slogos img {
+    width: 40px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slogos img:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+/* Footer */
+.foot {
+    font-size: 10px;
+    margin-top: 1%;
+    opacity:50%;
+    background-color: #333;
+    border-radius: 25px;
+    color: #fff;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 1024px) {
+    html {
+        font-size: 14px;
+    }
+
+    #home {
+        padding: 6rem 1rem 3rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .profile-img #pfp {
+        width: 130px;
+        height: 130px;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .game,
+    .game2 {
+        max-width: 250px;
+        padding: 1rem;
+    }
+
+    .slogos img {
+        width: 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+
+    #home {
+        padding: 5rem 1rem 3rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .profile-img #pfp {
+        width: 120px;
+        height: 120px;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .game,
+    .game2 {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .slogos img {
+        width: 30px;
+    }
+
+    .nav-bar {
+        padding-left: 2%;
+    }
+
+    #logo {
+        width: 10rem;
+        padding: 1rem;
+    }
+
+    section {
+        padding: 3rem 1rem;
+    }
+
+    .aboutme {
+        padding: 2rem;
+    }
+
+    .aboutme-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-img {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
+
+    #home {
+        padding: 4rem 1rem;
+    }
+
+    .aboutme {
+        padding: 1.5rem;
+    }
+
+    .profile-img #pfp {
+        width: 100px;
+        height: 100px;
+    }
+
+    .about-text {
+        font-size: 0.9rem;
+    }
+
+    .game,
+    .game2 {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    #b1,
+    #b2 {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+
+    .slogos img {
+        width: 28px;
+    }
+}
