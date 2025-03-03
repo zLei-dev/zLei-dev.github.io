@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A modular website using Flexbox & Grid with smooth transitions and responsive design."
+    />
+    <title>Modular Flexbox & Grid Website</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" aria-label="Main Navigation">
+        <div class="logo">Logo</div>
+        <ul class="social-links">
+          <li>
+            <a href="#" aria-label="Facebook"
+              ><img
+                src="https://via.placeholder.com/20x20?text=FB"
+                alt="Facebook"
+            /></a>
+          </li>
+          <li>
+            <a href="#" aria-label="Instagram"
+              ><img
+                src="https://via.placeholder.com/20x20?text=IG"
+                alt="Instagram"
+            /></a>
+          </li>
+          <li>
+            <a href="#" aria-label="Twitter"
+              ><img
+                src="https://via.placeholder.com/20x20?text=TW"
+                alt="Twitter"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="section1" class="section">
+        <div class="content">
+          <h1>Hello, welcome to the website!</h1>
+        </div>
+      </section>
+
+      <section id="section2" class="section">
+        <div class="content">
+          <h2>We're glad you're here!</h2>
+        </div>
+      </section>
+
+      <section id="section3" class="section">
+        <div class="content">
+          <picture>
+            <source
+              media="(min-width: 800px)"
+              srcset="https://picsum.photos/200/300"
+            />
+            <source
+              media="(min-width: 400px)"
+              srcset="https://picsum.photos/200/300"
+            />
+            <img
+              src="https://picsum.photos/200/300"
+              alt="Responsive design image"
+              class="responsive-img"
+            />
+          </picture>
+        </div>
+      </section>
+
+      <section id="section4" class="section">
+        <div class="content">
+          <article>
+            <h2>Article Title</h2>
+            <p>
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              luctus urna sed urna ultricies ac tempor dui sagittis. In
+              condimentum facilisis porta. Sed nec diam eu diam mattis viverra.
+              Nulla fringilla, orci ac euismod semper, magna diam porttitor
+              mauris, quis sollicitudin sapien justo in libero. Fusce sed nisi
+              ac dui aliquam feugiat. Nulla facilisi. Donec tincidunt, sapien ut
+              suscipit consequat, urna quam viverra nisi, in interdum massa nibh
+              nec erat. Etiam cursus luctus nulla, a vestibulum lorem tempus
+              quis. Pellentesque in sagittis lacus. Nam vestibulum, erat at
+              facilisis bibendum, arcu erat mollis sem, in placerat sapien nulla
+              non neque.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="section5" class="section no-accent">
+        <div class="split">
+          <div class="box text-box">
+            <h2>Section 5 Text</h2>
+            <p>
+              This is some text for section 5. It introduces the split layout
+              design and provides insights into our content.
+            </p>
+          </div>
+          <img
+            src="https://picsum.photos/200/300"
+            alt="Sticky visual"
+            class="sticky-img"
+          />
+        </div>
+      </section>
+
+      <section id="section6" class="section no-accent">
+        <div class="split">
+          <div class="box text-box">
+            <h2>Section 6 Text</h2>
+            <p>
+              This is new text for section 6. The image on the right remains the
+              same and will fade out as the user approaches the next section.
+            </p>
+          </div>
+          <img
+            src="https://picsum.photos/200/300"
+            alt="Sticky visual"
+            class="sticky-img"
+          />
+        </div>
+      </section>
+
+      <section id="section7" class="section no-accent">
+        <div class="split">
+          <div class="box text-box">
+            <h2>Section 7 Text</h2>
+            <p>
+              This is the final section. As you scroll here, the previous sticky
+              image fades out and a new image appears, creating a smooth
+              transition.
+            </p>
+          </div>
+          <img
+            src="https://picsum.photos/200/300"
+            alt="New visual"
+            class="new-img"
+          />
+        </div>
+      </section>
+
+      <section>
+        <div class="content">
+          <footer>
+            <p>&copy; 2025 Modular Flexbox & Grid Website</p>
+          </footer>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
