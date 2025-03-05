@@ -1,0 +1,349 @@
+/* ===========================
+   CSS Custom Properties
+=========================== */
+:root {
+    --bg-color: #0c0c0c;
+    --text-color: #fff;
+    --accent-color: #4b0082;
+    --max-width: 1700px;
+    --transition-duration: 0.5s;
+    --font-family: "Proxima Nova", sans-serif;
+    --line-height: 1.6;
+    --accent-line-height: 4px;
+    --accent-line-width: 50%;
+    --accent-line-offset: 25%;
+    --section-padding: 3rem;
+    --section-margin: 2rem 1rem;
+    --split-gap: 18rem;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+/* ===========================
+   Global Reset & Base Styles
+=========================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: var(--line-height);
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 1);
+    color: white;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.logo {
+
+    font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.social-links {
+
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+.social-links li img {
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+/* ===========================
+   Sections
+=========================== */
+.section {
+    height: 100vh;
+    padding: var(--section-padding);
+    margin: var(--section-margin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease-in-out;
+}
+
+.section.visible {
+    opacity: 1;
+}
+
+/*=============================
+  Section 3
+============================ */
+#section3 video {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#section3 img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+}
+
+.gallery img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* ===========================
+   Content Container
+=========================== */
+.content {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* ===========================
+   Headings with Enhanced Accent Lines
+=========================== */
+h1,
+h2,
+h3 {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
+}
+
+h1::before,
+h1::after,
+h2::before,
+h2::after,
+h3::before,
+h3::after {
+    content: "";
+    position: absolute;
+    left: var(--accent-line-offset);
+    width: var(--accent-line-width);
+    height: var(--accent-line-height);
+    background: linear-gradient(to right,
+            transparent 0%,
+            var(--accent-color) 50%,
+            transparent 100%);
+    border-radius: 2px;
+}
+
+h1::before {
+    top: -2rem;
+}
+
+h1::after {
+    bottom: -2rem;
+}
+
+h2::before {
+    top: -1.5rem;
+}
+
+h2::after {
+    bottom: -1.5rem;
+}
+
+h3::before {
+    top: -1.2rem;
+}
+
+h3::after {
+    bottom: -1.2rem;
+}
+
+.no-accent h1::before,
+.no-accent h1::after,
+.no-accent h2::before,
+.no-accent h2::after,
+.no-accent h3::before,
+.no-accent h3::after {
+    background: none;
+}
+
+/* ===========================
+   Responsive Images
+=========================== */
+.responsive-img {
+    width: 100%;
+    max-width: var(--max-width);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ===========================
+   Article Styles
+=========================== */
+article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* ===========================
+   Split Layout (Sections 5, 6, 7)
+=========================== */
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--split-gap);
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.no-accent .box {
+    width: fit-content;
+    max-width: 75%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    margin: auto;
+    text-align: justify;
+    font-size: clamp(1rem, 1vw, 1.2rem);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================
+   Sticky & New Images
+=========================== */
+.sticky-img,
+.new-img {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+.sticky-img {
+    position: sticky;
+    top: 2rem;
+    transition: opacity var(--transition-duration) ease-out;
+}
+
+.new-img {
+    transition: opacity var(--transition-duration) ease-in;
+    opacity: 0;
+}
+
+#section15 img {
+    width: 100%;
+    max-width: 600px;
+    position: sticky;
+    top: 2rem;
+    border-radius: 60px;
+    transition: opacity var(--transition-duration) ease-out;
+}
+
+#section12 video {
+    width: 100%;
+    max-width: 900px;
+    position: sticky;
+    top: 2rem;
+    border-radius: 50px;
+    transition: opacity var(--transition-duration) ease-out;
+}
+
+/* ===========================
+   Mobile Responsive Adjustments
+=========================== */
+@media (max-width: 768px) {
+    :root {
+        --max-width: 100%;
+        --section-padding: 2rem;
+        --section-margin: 1rem;
+        --split-gap: 2rem;
+    }
+
+    .navbar,
+    .content,
+    .split {
+        padding: 0 1rem;
+        max-width: var(--max-width);
+    }
+
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .responsive-img,
+    .sticky-img,
+    .new-img {
+        max-width: 100%;
+    }
+
+    #section12 video {
+        max-width: 100%;
+    }
+    #section15 img {
+        max-width: 100%;
+    }
+}
