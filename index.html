@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Love 💕</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <audio
+      id="bgm1"
+      src="assets/bgm/late-night.wav"
+      autoplay
+      loop
+      muted
+    ></audio>
+    <audio id="bgm2" src="assets/bgm/Happy-3x.wav" loop></audio>
+    <audio id="bgm3" src="assets/bgm/sussy-m.wav" loop></audio>
+
+    <div class="container">
+      <div class="card show" id="card1">
+        <div class="line">
+          <p>I love you.</p>
+          <img
+            src="https://tenor.com/view/besito-catlove-gif-9168835756461277783.gif"
+            alt="cat"
+          />
+        </div>
+        <button class="choice tooltip-btn" id="c1next">
+          I know you do.
+          <span class="tooltip-text" style="font-size: 13px">
+            ehh where's my I love you?
+          </span>
+        </button>
+      </div>
+
+      <div class="card hidden" id="card2">
+        <div class="line">
+          <p>You're not gonna say it back? :(</p>
+          <img
+            src="https://i.pinimg.com/736x/aa/ac/90/aaac908682ac73e06a0b7ba58a484c2c.jpg"
+            alt="cat"
+          />
+        </div>
+        <button class="choice tooltip-btn" id="c2next" id="c1next">
+          Keep dreaming.
+          <span class="tooltip-text" style="font-size: 13px">
+            HUHHH? 😭😭
+          </span>
+        </button>
+      </div>
+
+      <div class="card hidden" id="card3">
+        <div class="line">
+          <p>
+            :((( You're just saying that cuz you don't have the option to say "I
+            love you too" right?
+          </p>
+          <img
+            src="https://tenor.com/view/cat-cat-cry-cat-sob-gif-11047898104855709608.gif"
+            alt="cat"
+          />
+        </div>
+        <div class="choices">
+          <button class="choice tooltip-btn" id="yes">
+            Yes
+            <span class="tooltip-text" style="font-size: 13px">
+              CLICK IT 🔫🦆
+            </span>
+          </button>
+          <button class="choice" id="no">No</button>
+        </div>
+      </div>
+
+      <div class="card hidden" id="yesBranch">
+        <div class="line">
+          <p>Oh then scroll down a bit the button should be there.</p>
+          <img
+            src="https://tenor.com/view/cat-hyppy-gif-9091438043443803258.gif"
+            alt="cat"
+          />
+        </div>
+      </div>
+
+      <div class="card hidden" id="finalCard">
+        <button class="choice" id="iloveyoutoo">I love you too</button>
+      </div>
+
+      <div class="popup hidden" id="popup">
+        <div class="popup-content">
+          <h2>
+            GREAT, LETS GET MARRIED. LETS GET MARRIED AND HAVE LOTS OF CHILDREN
+            TOGETHER 😈😈❤️
+          </h2>
+          <img
+            src="https://tenor.com/view/cat-smug-face-gif-12478527195768308361.gif"
+            alt="cat"
+          />
+          <button id="closePopup" class="tooltip-btn">
+            Close
+            <span class="tooltip-text">I love you cutie. <3 </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
