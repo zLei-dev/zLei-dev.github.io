@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     let average = sum / bufferLength;
 
-    return average > 50; //ETO CHANGEEEEEE
+    return average > 50; 
   }
 
   function blowOutCandles() {
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         audio.onended = function () {
           setTimeout(function () {
-            window.open("a2.html", "_self");
+            window.open("https://zlei-dev.github.io/a2.html", "_self");
           }, 3000);
         };
       }
