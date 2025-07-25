@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="bday.png" />
+    <title>happy birthday @soulatte</title>
+    <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body,
+      html {
+        overflow-x: hidden;
+      }
+
+      body {
+        background-color: #fff0f5;
+        color: #ff69b4;
+        font-family: "Poppins", sans-serif;
+        overflow: auto;
+      }
+
+      .page {
+        min-height: 100vh;
+        height: auto;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s ease;
+      }
+
+      .page.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .highlight {
+        color: #ff1493;
+        font-weight: bold;
+      }
+
+      .button {
+        background-color: #ff69b4;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: background 0.3s;
+      }
+
+      .button:hover {
+        background-color: #ff1493;
+      }
+
+      img {
+        max-width: 70vw;
+        max-height: 50vh;
+        margin-bottom: 20px;
+      }
+
+      .letter {
+        white-space: pre-line;
+        font-size: 1.1rem;
+        max-width: 600px;
+        width: 100%;
+        text-align: left;
+        border-left: 3px solid #ff69b4;
+        padding-left: 15px;
+        min-height: 200px;
+        max-height: 60vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+      }
+
+      .falling {
+        position: fixed;
+        top: -30px;
+        font-size: 24px;
+        animation: fall linear infinite;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      .pink-heart {
+        color: #ff69b4;
+      }
+
+      .yellow-star {
+        color: #facc15;
+      }
+
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 9999;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(120vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .button {
+          padding: 10px 20px;
+          font-size: 1rem;
+        }
+
+        .letter {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page active" id="page1">
+      <img
+        src="https://tenor.com/view/birthday-cake-mochi-mochi-peach-cat-gif-7935144640471707564.gif"
+        alt="Cute Icon"
+      />
+      <h1>Happy Birthday <span class="highlight"> my love!</span></h1>
+      <p>your next surprise is just a click away ✨</p>
+      <button class="button" onclick="goToPage(2)">tap ‹𝟹</button>
+    </div>
+
+    <div class="page" id="page2">
+      <img
+        src="https://tenor.com/view/mail-love-gif-26241536.gif"
+        alt="Envelope"
+      />
+      <p>knock knock .. open me up! ( ∩´͈ ᐜ `͈∩)</p>
+      <button class="button" onclick="goToPage(3)">open it ‹𝟹</button>
+    </div>
+
+    <div class="page" id="page3" style="font-family: 'Dancing Script', cursive">
+      <h2>My dear baby <𝟑 .ᐟ</h2>
+      <div class="letter" id="letterText"></div>
+    </div>
+
+    <audio id="bg-music" src="res/bgm.mp3" autoplay loop muted></audio>
+    <audio
+      id="click-sound"
+      src="https://public.youware.com/users-website-assets/prod/50390417-3924-48fa-b7cc-21adb627e36e/256113_3263906-lq.mp3"
+      preload="auto"
+    ></audio>
+    <div class="music-control" id="musicControl">🔇</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      const fullLetter = `Happiest Birthday, to my love. 💕
+
+      I hope this message finds you well. As you read this, I'm probably cringing my heart out because of how cringe my writing is. Anyways...
+
+      🎂 Happy Birthday
+
+      I wish you the happiest of happy birthdays, my love.
+      I hope today and hopefully the coming days rains you with fortune. Ehe.
+
+      Celebrating your birthday feels special. From the day we first met, to our first movie date, and now to this moment I couldn't be happier. Watching you grow. Watching us grow. These are memories I'll always cherish in both my mind and heart. I'm looking forward to whatever time has in store for us. Albeit rough, I believe we'll endure. Nothing worth having is ever easy.
+
+      🌸 Why I Like You (Yes, Again)
+
+      This is a secret but erm… I like you.
+      Crazy, right?
+
+      You're not just some girl to me.
+      You're you
+      You, who made me fall in love.
+      You, who helped me discover more in life.
+      You, who made me go out of my shell.
+      You, who listens when I open up about my problems.
+      You, who accepts my kisses, hugs, and weirdness.
+
+      You're not ordinary.
+      You're special.
+      You're my special girlfriend, companion, partner, therapist, and happy pill.
+      Honestly, meeting you was the hardest right turn of my life.
+      Like ooga booga—this woman, she's mine now, lmao.
+
+      I miss you so much.
+      Yes, I'm a simp for you.
+      I apologize for having a big fat crush on you.
+      I'm gay for that.
+      Yesn't.
+
+      💞 How I Feel About Us
+
+      Our time together makes me so happi.
+      It hasn't even been a month, and we've already crossed so many mountains. Sure, we're still climbing a few but we'll survive, won't we?
+
+      There's no thrill in a relationship without ups and downs. And through all of it, I feel so fortunate, thankful, grateful, really for your patience with me. Even when you give me BS compliments (which I still don't accept some of them 😒), I know they come from a place of love. I'll try to learn to love myself… ehehe...
+
+      No matter how hurt I am, no matter how much I miss you, no matter how deep in shit we are. I'll still keep trying to fix things for us. You're not just one in a billion you're the one in a billion. If you get it, yk.
+
+      🫶 How Much You Mean to Me
+
+      Words alone can't express how deeply I feel about you.
+      The “I love you”'s, the “I'm lucky to have you” they're nothing compared to what's really inside.
+      Only raw, quiet, messy, beautiful moments can truly show how I feel.
+
+      From us sitting silently next to each other… to our most chaotic moments.
+      Your presence alone gives me the light to keep going (that's a W btw), especially when I randomly get depressed. I'm so D A M N lucky.
+
+      I love you.
+      Not just now.
+      Not just before we were official.
+      But forever will.
+
+      And yeah, about you insisting I should “prepare”... Don't worry, baby girl. I've already been planning our wedding, and how our house will look like ;3
+
+      Like fr, you really don't get it sometimes.
+      You think I'm just saying things?
+      No baby, you don't get it I'm so lucky to have you.
+      I got blessed. Random drop from the universe type shi.
+      I don't want anyone else. I don't even look.
+      You're the only one in my heart. In my head.
+      My thoughts just loop around you all the time.
+      You're not replaceable. You're not a placeholder. You're it.
+
+      Even if the whole world tells me to move on, to give up, to let go nah.
+      You're stuck with me.
+      I'm not letting go.
+      You're not just my girl you're my person. My endgame.
+      You're home.
+      You're the one I'll always come back to even if I'm shattered. Even if we argue.
+      Even if everything else fails.
+      I'll be here. Right here. Still choosing you. Still loving you.
+
+      You're not “one of many.”
+      You're not someone I'll get over.
+      You're you.
+      You're the one I plan around. The one I see when I picture my future.
+      You're the reason I open up more. Why I keep trying even when I want to shut down.
+      You're my love, my peace, my chaos, my everything.
+      And I don't say that to be dramatic.
+      I say it because it's true.
+      You're it for me.
+      I'm not scared of being stuck with you.
+      I'm scared of anything without you.
+
+      🧠 The Broken Parts of Me
+
+      Having to experience being with an autistically weird person like me someone who's not only broken but also plagued with mental problems it's not easy. So I'm not surprised... but I am happy that you still kinda accept me. TT
+
+      The experiences I've had with you? They'll stay with me forever.
+      You're my first, after all. My FIRST.
+      Remember that.
+
+      You're the only one I think of when we go on dates or try something new.
+      It's always you. My girlfriend.
+
+      🎥 My Favorite Moment
+
+      There's one moment that lives rent-free in my heart:
+      That time we were in the movies.
+      I don't know why but your body leaning against mine, the shallow silence of the room… it gave me this overwhelming feeling of peace and safety.
+
+      It was immaculate.
+      I actually enjoyed that time so much.
+      Wishing time would pause in that moment for me, for us to just soak it in forever.
+
+      ---
+
+      So yeah... my letter is chaotic, but so is love.
+      I'll always love you, no matter what happens.
+      And in exchange? Nothing, really.
+      Just your presence. Your visible efforts. Your soft affection.
+      Even if you don't do any of that I still love you. Unconditionally.
+
+      You're so cooked. I pity you.
+      Happy birthday, baby.
+      I love you.
+
+      With all my love,
+      Your boyfriend`;
+
+      // Play click sound function
+      function playClickSound() {
+        const clickSound = document.getElementById("click-sound");
+        clickSound.currentTime = 0;
+        clickSound.play().catch((e) => console.log("Audio play failed:", e));
+      }
+
+      // Add click sound to all buttons and clickable elements
+      document.addEventListener("DOMContentLoaded", function () {
+        const clickableElements = document.querySelectorAll(
+          "button, .music-control"
+        );
+        clickableElements.forEach((element) => {
+          element.addEventListener("click", playClickSound);
+        });
+      });
+
+      function goToPage(pageNum) {
+        const pages = document.querySelectorAll(".page");
+        pages.forEach((p) => p.classList.remove("active"));
+        const next = document.getElementById(`page${pageNum}`);
+        next.classList.add("active");
+
+        if (pageNum === 3) {
+          const music = document.getElementById("bg-music");
+          music.muted = false;
+          music.volume = 0.35; //
+          music.play().catch((e) => console.log("Autoplay blocked:", e));
+          document.getElementById("musicControl").textContent = "🔊";
+
+          confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+          typeText(fullLetter, document.getElementById("letterText"), 45);
+          startFallingSymbols();
+        }
+      }
+
+      function typeText(text, element, speed) {
+        element.innerHTML = "";
+        let i = 0;
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            element.scrollTop = element.scrollHeight;
+            i++;
+            setTimeout(type, speed);
+          } else {
+            // Create styled button after message finishes
+            const btn = document.createElement("button");
+            btn.className = "button";
+            btn.textContent = "your last surprise ‹𝟹";
+            btn.style.marginTop = "30px";
+            btn.style.alignSelf = "center";
+
+            btn.onclick = () => {
+              if (!bgMusic.paused) {
+                bgMusic.muted = true;
+                musicControl.textContent = "🔇";
+                isMuted = true;
+              }
+
+              window.open(
+                "https://www.youtube.com/watch?v=c7StqjiHntk&list=RDc7StqjiHntk&start_radio=1",
+                "_blank"
+              );
+            };
+
+            element.parentElement.appendChild(btn);
+          }
+        }
+
+        type();
+      }
+
+      function startFallingSymbols() {
+        setInterval(() => {
+          const el = document.createElement("div");
+          el.classList.add("falling");
+          const isHeart = Math.random() < 0.5;
+          el.innerText = isHeart ? "💕" : "⭐";
+          el.classList.add(isHeart ? "pink-heart" : "yellow-star");
+          el.style.left = Math.random() * 100 + "vw";
+          el.style.animationDuration = 3 + Math.random() * 2 + "s";
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 6000);
+        }, 300);
+      }
+
+      // Music control
+      const musicControl = document.getElementById("musicControl");
+      const bgMusic = document.getElementById("bg-music");
+      let isMuted = true;
+
+      musicControl.addEventListener("click", function () {
+        if (isMuted) {
+          bgMusic.muted = false;
+          bgMusic.play().catch((e) => console.log("Autoplay blocked:", e));
+          musicControl.textContent = "🔊";
+          isMuted = false;
+        } else {
+          bgMusic.muted = true;
+          musicControl.textContent = "🔇";
+          isMuted = true;
+        }
+      });
+    </script>
+  </body>
+</html>
