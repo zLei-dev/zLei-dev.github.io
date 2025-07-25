@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         audio.onended = function () {
           setTimeout(function () {
-            window.open("http://127.0.0.1:5500/a2.html", "_self");
+            window.open("a2.html", "_self");
           }, 3000);
         };
       }
