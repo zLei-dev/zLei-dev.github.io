@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let analyser;
   let celebrationStarted = false;
   let microphone;
-  let audio = new Audio('res/hbd.wav');
+  let audio = new Audio('res/sounds/hbd.wav');
 
 
   function updateCandleCount() {
