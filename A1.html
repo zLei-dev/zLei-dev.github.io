@@ -92,7 +92,9 @@
         const pid = getPlayerId();
         const peer = makePeer(pid, (id) => {
           console.log(`Player ID: ${id} has connected.`);
-          alert(`Your Player ID is: ${id}`);
+          navigator.clipboard.writeText(id)
+            .then(() => console.log(`Player ID ${id} copied to clipboard.`))
+            .catch(err => console.warn("Clipboard copy failed:", err));
         });
         navigator.mediaDevices
           .getUserMedia({ video: true, audio: true })
