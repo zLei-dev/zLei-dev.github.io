@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuralSync Control Interface — Responsive</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg-1: #071228;
+        --panel: #0f1c2b;
+        --glass: rgba(255, 255, 255, 0.04);
+        --accent-a: #3df9d8;
+        --accent-b: #5ac8ff;
+        --muted: rgba(230, 255, 250, 0.8);
+        --text: #e9fffb;
+        --card-radius: 14px;
+        --ui-gap: 18px;
+        --btn-pad: 12px 18px;
+        --btn-radius: 12px;
+        --shadow: 0 12px 30px rgba(2, 8, 23, 0.65);
+      }
+
+      /* fluid base font size */
+      html {
+        font-size: 15px;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: Inter, "Segoe UI", system-ui, -apple-system, Arial,
+          Helvetica, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(180deg, var(--bg-1), #04121b);
+        color: var(--text);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 18px;
+      }
+
+      /* container */
+      .wrap {
+        width: 100%;
+        max-width: 1180px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          transparent
+        );
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--glass);
+        backdrop-filter: blur(6px);
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        font-size: clamp(18px, 2.2vw, 22px);
+        margin: 0;
+        color: var(--text);
+        letter-spacing: 0.8px;
+      }
+
+      p.lead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* chip stage */
+      .chip-stage {
+        position: relative;
+        border-radius: 12px;
+        width: 100%;
+        height: 260px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(90, 200, 220, 0.06),
+          transparent 40%
+        );
+        margin: 0 auto;
+      }
+
+      .chip {
+        width: min(44vw, 220px);
+        height: min(44vw, 220px);
+        max-width: 220px;
+        max-height: 220px;
+        min-width: 140px;
+        min-height: 140px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(0, 0, 0, 0.06)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        transition: transform 180ms ease, box-shadow 180ms ease;
+        touch-action: manipulation;
+      }
+
+      .chip.boost {
+        transform: scale(1.05);
+        box-shadow: 0 0 28px rgba(61, 249, 216, 0.14);
+      }
+
+      svg.ring {
+        width: 70%;
+        height: 70%;
+        opacity: 0.9;
+        transform: rotate(-8deg);
+      }
+
+      .pulse {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        opacity: 0.9;
+        transition: opacity 220ms ease;
+      }
+
+      .status-bar {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .status {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .status-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--muted);
+      }
+
+      .status-indicator.active {
+        background: var(--accent-a);
+        box-shadow: 0 0 8px var(--accent-a);
+      }
+
+      .pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.18);
+        font-size: 13px;
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      /* controls: touch friendly */
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 14px;
+        justify-content: center;
+      }
+
+      button.btn {
+        background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+        color: #021824;
+        font-weight: 700;
+        border: none;
+        padding: 14px 18px;
+        border-radius: 12px;
+        cursor: pointer;
+        min-width: 120px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform 120ms ease, box-shadow 120ms ease;
+        font-size: 15px;
+        touch-action: manipulation;
+      }
+
+      button.btn:focus-visible {
+        outline: 3px solid rgba(90, 200, 255, 0.14);
+        outline-offset: 2px;
+      }
+
+      button.btn.ghost {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      button[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .card-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          transparent
+        );
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        width: 100%;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 16px;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .small {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      .stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .slider {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+        width: 100%;
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.02)
+        );
+        width: 100%;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #ffffff, #dffaf0);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        border: 2px solid rgba(255, 255, 255, 0.08);
+        margin-top: -9px; /* centers thumb vertically on track */
+      }
+
+      /* Switch */
+      .switch {
+        width: 56px;
+        height: 34px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 999px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        cursor: pointer;
+        flex-shrink: 0;
+        touch-action: manipulation;
+      }
+
+      .knob {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #fff, #dffaf0);
+        transition: left 180ms ease;
+      }
+
+      .switch.on {
+        background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      }
+
+      .switch.on .knob {
+        left: 26px;
+      }
+
+      .console-container {
+        height: 130px;
+        margin-top: 12px;
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.14);
+        overflow: auto;
+        color: #c7f6ec;
+        font-family: SF Mono, "Roboto Mono", monospace;
+        font-size: 13px;
+      }
+
+      .neural-activity {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .neural-node {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(0.6);
+        will-change: transform, opacity, left, top;
+      }
+
+      .brainwave-path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: dash 5s linear forwards;
+      }
+
+      @keyframes dash {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* Layout adjustments for medium+ screens */
+      @media (min-width: 880px) {
+        .wrap {
+          grid-template-columns: 1fr 1.05fr;
+        }
+
+        .chip-stage {
+          height: 320px;
+        }
+
+        .chip {
+          width: min(40vw, 220px);
+          height: min(40vw, 220px);
+          max-width: 260px;
+          max-height: 260px;
+        }
+
+        svg.ring {
+          width: 320px;
+          height: 320px;
+        }
+
+        .card-grid {
+          flex-direction: column;
+        }
+
+        .controls {
+          justify-content: flex-start;
+        }
+
+        button.btn {
+          min-width: 140px;
+          font-size: 15px;
+        }
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 879px) {
+        .wrap {
+          grid-template-columns: 1fr;
+        }
+
+        body {
+          padding: 12px;
+          align-items: stretch;
+        }
+
+        .panel {
+          padding: 14px;
+        }
+
+        h1 {
+          font-size: 18px;
+        }
+
+        .chip-stage {
+          height: 220px;
+        }
+
+        svg.ring {
+          width: 220px;
+          height: 220px;
+        }
+
+        .controls {
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 12px;
+        }
+
+        button.btn {
+          width: 100%;
+          padding: 14px 16px;
+          font-size: 16px;
+        }
+
+        .status-bar {
+          position: static;
+          bottom: auto;
+          left: auto;
+          right: auto;
+          margin-top: 10px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .card-grid {
+          gap: 10px;
+        }
+
+        .console-container {
+          height: 160px;
+        }
+
+        select#packSelect {
+          width: 100%;
+        }
+      }
+
+      /* reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        .chip,
+        svg.ring,
+        .pulse,
+        .neural-node,
+        .brainwave-path {
+          animation: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="panel left" role="region" aria-label="Neural control panel">
+        <header>
+          <h1>
+            <i class="fas fa-brain" aria-hidden="true"></i> NEURALSYNC CONTROL
+          </h1>
+          <p class="lead">Direct neural interface for cognitive enhancement</p>
+        </header>
+
+        <div class="chip-stage">
+          <div
+            class="neural-activity"
+            id="neuralActivity"
+            aria-hidden="true"
+          ></div>
+
+          <div class="chip" id="chipRoot" role="img" aria-label="Neural module">
+            <svg
+              class="ring"
+              viewBox="0 0 200 200"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="gA" x1="0" x2="1">
+                  <stop offset="0" stop-color="#3df9d8" />
+                  <stop offset="1" stop-color="#5ac8ff" />
+                </linearGradient>
+              </defs>
+              <g
+                fill="none"
+                stroke="url(#gA)"
+                stroke-width="2"
+                stroke-linecap="round"
+                opacity="0.9"
+              >
+                <circle cx="100" cy="100" r="72" stroke-opacity="0.22" />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="92"
+                  stroke-opacity="0.14"
+                  stroke-dasharray="6 8"
+                />
+              </g>
+            </svg>
+
+            <div class="pulse" id="pulseEl" aria-hidden="true"></div>
+          </div>
+
+          <div
+            class="progress-bar"
+            id="progressBar"
+            style="
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              height: 4px;
+              background: linear-gradient(
+                90deg,
+                var(--accent-a),
+                var(--accent-b)
+              );
+              width: 0;
+            "
+          ></div>
+
+          <div class="status-bar">
+            <div class="status">
+              <span
+                class="status-indicator"
+                id="statusIndicator"
+                aria-hidden="true"
+              ></span>
+              <span id="statusText">Idle</span>
+            </div>
+            <div class="pill" id="netIndicator">Net idle</div>
+          </div>
+        </div>
+
+        <div class="controls" role="toolbar" aria-label="Quick actions">
+          <button class="btn" id="downloadBtn" title="Download selected module">
+            <i class="fas fa-download" aria-hidden="true"></i> Download
+          </button>
+          <button
+            class="btn ghost"
+            id="previewBtn"
+            title="Preview selected pack"
+          >
+            <i class="fas fa-eye" aria-hidden="true"></i> Preview
+          </button>
+          <button class="btn ghost" id="resetBtn" title="Restore defaults">
+            <i class="fas fa-undo" aria-hidden="true"></i> Reset
+          </button>
+        </div>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>
+              <i class="fas fa-microchip" aria-hidden="true"></i> Active Module
+            </h3>
+            <div class="small" id="activePack">None</div>
+            <div class="stat">
+              <div class="small">Integrity</div>
+              <div id="integrityValue">—</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>
+              <i class="fas fa-bolt" aria-hidden="true"></i> Quick Actions
+            </h3>
+            <div class="small">Show AR overlay</div>
+            <div
+              style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap"
+            >
+              <button
+                class="btn ghost"
+                id="overlayBtn"
+                title="Toggle AR overlay"
+              >
+                <i class="fas fa-vr-cardboard" aria-hidden="true"></i> Overlay
+              </button>
+              <button
+                class="btn ghost"
+                id="calibrateBtn"
+                title="Run calibration"
+              >
+                <i class="fas fa-sliders-h" aria-hidden="true"></i> Calibrate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel right" role="region" aria-label="Settings and console">
+        <div
+          class="row"
+          style="display: flex; flex-direction: column; gap: 12px"
+        >
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div class="card">
+              <h3><i class="fas fa-memory" aria-hidden="true"></i> Memory</h3>
+              <div class="small">Allocate memory reserve for quick recall</div>
+              <div class="slider">
+                <input
+                  type="range"
+                  id="memoryRange"
+                  min="0"
+                  max="100"
+                  value="60"
+                  aria-label="Memory allocation"
+                />
+              </div>
+              <div class="stat">
+                <div class="small">Allocated</div>
+                <div id="memoryVal">60%</div>
+              </div>
+              <div class="stat">
+                <div class="small">Swap mode</div>
+                <div class="pill" id="swapMode">Auto</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>
+                <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                Learning Speed
+              </h3>
+              <div class="small">Control download throughput</div>
+              <div class="slider">
+                <input
+                  type="range"
+                  id="speedRange"
+                  min="10"
+                  max="200"
+                  value="80"
+                  aria-label="Learning speed"
+                />
+              </div>
+              <div class="stat">
+                <div class="small">Throughput</div>
+                <div id="speedVal">80%</div>
+              </div>
+              <div style="margin-top: 12px">
+                <div class="small">Brainwaves</div>
+                <div class="wave">
+                  <svg
+                    viewBox="0 0 200 40"
+                    preserveAspectRatio="none"
+                    id="brainwaveSvg"
+                  >
+                    <path
+                      id="wavePath"
+                      d="M0 20 Q40 10 80 20 T200 20"
+                      stroke="url(#wG)"
+                      stroke-width="2.6"
+                      fill="none"
+                      stroke-linecap="round"
+                      class="brainwave-path"
+                    ></path>
+                    <defs>
+                      <linearGradient id="wG" x1="0" x2="1">
+                        <stop offset="0" stop-color="#3df9d8" />
+                        <stop offset="1" stop-color="#5ac8ff" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div class="card">
+              <h3><i class="fas fa-bullseye" aria-hidden="true"></i> Focus</h3>
+              <div class="small">Toggle enhanced attention mode</div>
+              <div
+                class="toggle-container"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  align-items: center;
+                  margin-top: 10px;
+                "
+              >
+                <div
+                  class="switch"
+                  id="focusSwitch"
+                  role="switch"
+                  aria-checked="false"
+                  tabindex="0"
+                >
+                  <div class="knob" aria-hidden="true"></div>
+                </div>
+                <div style="flex: 1">
+                  <div style="font-weight: 600; color: #c7fff0">Normal</div>
+                  <div class="small">Toggle to Enhanced</div>
+                </div>
+              </div>
+              <div class="stat">
+                <div class="small">Current</div>
+                <div id="focusStatus">Normal</div>
+              </div>
+              <div style="margin-top: 12px">
+                <button class="btn" id="boostBtn" title="Short attention boost">
+                  <i class="fas fa-rocket" aria-hidden="true"></i> Micro-Boost
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>
+                <i class="fas fa-smile" aria-hidden="true"></i> Mood Balance
+              </h3>
+              <div class="small">Adjust emotional equilibrium</div>
+              <div
+                style="
+                  display: flex;
+                  gap: 12px;
+                  align-items: center;
+                  margin-top: 12px;
+                "
+              >
+                <input
+                  type="range"
+                  id="moodRange"
+                  min="0"
+                  max="100"
+                  value="50"
+                  aria-label="Mood bias"
+                />
+                <div
+                  style="
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    display: grid;
+                    place-items: center;
+                    font-weight: 700;
+                    background: conic-gradient(
+                      #5ac8ff 0% 50%,
+                      #3df9d8 50% 100%
+                    );
+                  "
+                >
+                  50
+                </div>
+              </div>
+              <div class="stat">
+                <div class="small">Stability</div>
+                <div id="moodVal">Balanced</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div class="card">
+              <h3>
+                <i class="fas fa-terminal" aria-hidden="true"></i> Session
+                Console
+              </h3>
+              <div class="small">Live feed and logs</div>
+              <div
+                class="console-container"
+                id="console"
+                aria-live="polite"
+                aria-atomic="false"
+              ></div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  margin-top: 12px;
+                  flex-wrap: wrap;
+                "
+              >
+                <button class="btn" id="exportBtn" title="Save log to file">
+                  <i class="fas fa-file-export" aria-hidden="true"></i> Export
+                  Log
+                </button>
+                <button
+                  class="btn ghost"
+                  id="clearLogBtn"
+                  title="Clear console"
+                >
+                  <i class="fas fa-broom" aria-hidden="true"></i> Clear
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>
+                <i class="fas fa-cube" aria-hidden="true"></i> Module Library
+              </h3>
+              <div class="small">Select a pack to load</div>
+              <div
+                style="
+                  margin-top: 12px;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                "
+              >
+                <select
+                  id="packSelect"
+                  style="
+                    padding: 12px;
+                    border-radius: 10px;
+                    background: rgba(255, 255, 255, 0.03);
+                    color: #eaf8f4;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    font-size: 16px;
+                  "
+                >
+                  <option value="advanced_physics">Advanced Physics</option>
+                  <option value="speed_read">Speed Reading</option>
+                  <option value="spanish">Spanish Basics</option>
+                  <option value="history">World History</option>
+                </select>
+                <button
+                  class="btn"
+                  id="loadBtn"
+                  title="Compute integrity for selected pack"
+                >
+                  <i class="fas fa-cogs" aria-hidden="true"></i> Load for
+                  Preview
+                </button>
+              </div>
+              <div style="margin-top: 12px">
+                <div class="small">Integrity</div>
+                <div id="libIntegrity" class="pill" style="margin-top: 8px">
+                  —
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 12px">
+          <div class="pill">
+            <i class="fas fa-code-branch" aria-hidden="true"></i> NeuralSync
+            v2.4.1
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const $ = (id) => document.getElementById(id);
+        const consoleEl = $("console");
+        const statusText = $("statusText");
+        const statusIndicator = $("statusIndicator");
+        const netIndicator = $("netIndicator");
+        const pulseEl = $("pulseEl");
+        const activePack = $("activePack");
+        const integrityValue = $("integrityValue");
+        const memoryRange = $("memoryRange");
+        const memoryVal = $("memoryVal");
+        const speedRange = $("speedRange");
+        const speedVal = $("speedVal");
+        const focusSwitch = $("focusSwitch");
+        const focusStatus = $("focusStatus");
+        const boostBtn = $("boostBtn");
+        const moodRange = $("moodRange");
+        const moodVal = $("moodVal");
+        const downloadBtn = $("downloadBtn");
+        const previewBtn = $("previewBtn");
+        const resetBtn = $("resetBtn");
+        const packSelect = $("packSelect");
+        const loadBtn = $("loadBtn");
+        const libIntegrity = $("libIntegrity");
+        const exportBtn = $("exportBtn");
+        const clearLogBtn = $("clearLogBtn");
+        const chipRoot = $("chipRoot");
+        const progressBar = document.querySelector(".progress-bar");
+        const neuralActivity = $("neuralActivity");
+        const wavePath = $("wavePath");
+
+        let dlTimer = null;
+        let dlProgress = 0;
+        let isPreviewing = false;
+        let nodes = [];
+        let nodesInterval = null;
+
+        function nowTime() {
+          return new Date().toLocaleTimeString();
+        }
+
+        function log(text) {
+          if (!consoleEl) return;
+          const line = document.createElement("div");
+          line.className = "console-line";
+          line.textContent = `${nowTime()}  ${text}`;
+          consoleEl.insertBefore(line, consoleEl.firstChild);
+          while (consoleEl.children.length > 60) {
+            consoleEl.removeChild(consoleEl.lastChild);
+          }
+        }
+
+        function setStatus(s) {
+          statusText.textContent = s;
+          if (s === "Idle") {
+            statusIndicator.classList.remove("active");
+          } else {
+            statusIndicator.classList.add("active");
+          }
+        }
+
+        function setNet(s) {
+          if (netIndicator) netIndicator.textContent = s;
+        }
+
+        function initNeuralNodes(count = 18) {
+          // clean up previous
+          neuralActivity.innerHTML = "";
+          nodes = [];
+          if (nodesInterval) {
+            clearInterval(nodesInterval);
+            nodesInterval = null;
+          }
+          for (let i = 0; i < count; i++) {
+            const n = document.createElement("div");
+            n.className = "neural-node";
+            n.style.left = `${Math.random() * 100}%`;
+            n.style.top = `${Math.random() * 100}%`;
+            n.style.background = i % 2 ? "var(--accent-b)" : "var(--accent-a)";
+            n.style.transition =
+              "transform 900ms ease, opacity 900ms ease, left 900ms ease, top 900ms ease";
+            neuralActivity.appendChild(n);
+            nodes.push(n);
+          }
+          // subtle animation loop (lower cost on mobile)
+          nodesInterval = setInterval(() => {
+            const now = Date.now();
+            nodes.forEach((n, idx) => {
+              // stagger behaviors so not all update at once
+              if ((now + idx * 37) % 3 === 0) {
+                n.style.opacity = Math.random() < 0.6 ? 0.85 : 0.15;
+                n.style.transform = `scale(${0.8 + Math.random() * 0.8})`;
+                n.style.left = `${Math.random() * 100}%`;
+                n.style.top = `${Math.random() * 100}%`;
+              }
+            });
+          }, 2200);
+        }
+
+        function updateBrainwaveAnimation(speed) {
+          const duration = 5 - ((speed - 10) / 190) * 4.5;
+          wavePath.style.animationDuration = `${Math.max(0.6, duration).toFixed(
+            2
+          )}s`;
+          // redraw path with simple sine
+          const intensity = (speed - 10) / 190;
+          const amp = 5 + intensity * 12;
+          const freq = 0.02 + intensity * 0.05;
+          let path = "M0 20";
+          for (let x = 0; x <= 200; x += 8) {
+            const y = 20 + Math.sin(x * freq) * amp;
+            path += ` L${x} ${y}`;
+          }
+          wavePath.setAttribute("d", path);
+        }
+
+        // Simple integrity function
+        function computeIntegrity(name) {
+          let val = 70 + ((name.length * 3) % 30);
+          val = Math.max(10, Math.min(100, Math.round(val)));
+          return val;
+        }
+
+        function downloadModule() {
+          if (dlTimer) return;
+          const packKey = packSelect.value;
+          const packLabel = packSelect.options[packSelect.selectedIndex].text;
+          setStatus("Initializing download " + packLabel);
+          setNet("Net: syncing");
+          log("start download " + packLabel);
+          dlProgress = 0;
+          progressBar.style.width = "0%";
+          [downloadBtn, loadBtn, packSelect, previewBtn].forEach(
+            (el) => (el.disabled = true)
+          );
+
+          dlTimer = setInterval(() => {
+            dlProgress += Math.max(6, Math.random() * 18);
+            const pct = Math.min(100, dlProgress);
+            progressBar.style.width = pct + "%";
+            if (pct >= 100) {
+              clearInterval(dlTimer);
+              dlTimer = null;
+              onDownloadComplete(packKey, packLabel);
+            } else {
+              setStatus("Downloading " + Math.round(pct) + "%");
+            }
+          }, 260);
+        }
+
+        function onDownloadComplete(key, label) {
+          setStatus("Integrating " + label);
+          setNet("Net: idle");
+          activePack.textContent = label;
+          integrityValue.textContent = computeIntegrity(key) + "%";
+          log("complete " + label + " integrated");
+          chipRoot.classList.add("boost");
+          setTimeout(() => chipRoot.classList.remove("boost"), 620);
+          [downloadBtn, loadBtn, packSelect, previewBtn].forEach(
+            (el) => (el.disabled = false)
+          );
+          setTimeout(() => {
+            progressBar.style.width = "0%";
+            setStatus("Idle");
+          }, 1200);
+        }
+
+        let boostLock = false;
+        function activateBoost() {
+          if (boostLock) return;
+          boostLock = true;
+          setStatus("Micro-boost active");
+          log("micro-boost engaged");
+          chipRoot.classList.add("boost");
+          setTimeout(() => {
+            chipRoot.classList.remove("boost");
+            setStatus("Idle");
+            boostLock = false;
+          }, 1600);
+        }
+
+        function resetSystem() {
+          activePack.textContent = "None";
+          integrityValue.textContent = "—";
+          memoryRange.value = 60;
+          memoryVal.textContent = "60%";
+          speedRange.value = 80;
+          speedVal.textContent = "80%";
+          focusSwitch.classList.remove("on");
+          focusSwitch.setAttribute("aria-checked", "false");
+          focusStatus.textContent = "Normal";
+          moodRange.value = 50;
+          moodVal.textContent = "Balanced";
+          consoleEl.innerHTML = "";
+          setStatus("Idle");
+          setNet("Net idle");
+          progressBar.style.width = "0%";
+          log("system reset");
+          if (dlTimer) {
+            clearInterval(dlTimer);
+            dlTimer = null;
+          }
+          updateBrainwaveAnimation(80);
+        }
+
+        function exportLog() {
+          const lines = Array.from(consoleEl.children)
+            .map((n) => n.textContent)
+            .join("\n");
+          const blob = new Blob([lines], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "neuralsync-log.txt";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          log("log exported");
+        }
+
+        function clearLog() {
+          consoleEl.innerHTML = "";
+          log("log cleared");
+        }
+
+        function initEventListeners() {
+          memoryRange.addEventListener("input", () => {
+            memoryVal.textContent = memoryRange.value + "%";
+            log("memory set to " + memoryRange.value + "%");
+          });
+          speedRange.addEventListener("input", () => {
+            const v = Math.round((speedRange.value - 10) / 1.9);
+            speedVal.textContent = v + "%";
+            log("throughput " + v + "%");
+            updateBrainwaveAnimation(speedRange.value);
+          });
+
+          moodRange.addEventListener("input", () => {
+            const v = Number(moodRange.value);
+            moodVal.textContent =
+              v < 40 ? "Calm" : v > 60 ? "Elevated" : "Balanced";
+            log("mood bias " + v);
+          });
+
+          function toggleFocus() {
+            const on = focusSwitch.classList.toggle("on");
+            focusStatus.textContent = on ? "Enhanced" : "Normal";
+            focusSwitch.setAttribute("aria-checked", String(on));
+            log("focus " + (on ? "enhanced" : "normal"));
+            if (on) {
+              chipRoot.classList.add("boost");
+              setTimeout(() => chipRoot.classList.remove("boost"), 760);
+            }
+          }
+
+          focusSwitch.addEventListener("click", toggleFocus);
+          focusSwitch.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleFocus();
+            }
+          });
+
+          loadBtn.addEventListener("click", () => {
+            const pack = packSelect.value;
+            const label = packSelect.options[packSelect.selectedIndex].text;
+            const integrity = computeIntegrity(pack);
+            libIntegrity.textContent = integrity + "%";
+            log("loaded " + label + " integrity " + integrity + "%");
+          });
+
+          previewBtn.addEventListener("click", () => {
+            if (isPreviewing) return;
+            const pack = packSelect.options[packSelect.selectedIndex].text;
+            setStatus("Previewing " + pack);
+            setNet("Net: local");
+            log("preview " + pack);
+            isPreviewing = true;
+            chipRoot.classList.add("boost");
+            setTimeout(() => {
+              chipRoot.classList.remove("boost");
+              setStatus("Idle");
+              isPreviewing = false;
+            }, 1200);
+          });
+
+          downloadBtn.addEventListener("click", downloadModule);
+          boostBtn.addEventListener("click", activateBoost);
+          resetBtn.addEventListener("click", resetSystem);
+          exportBtn.addEventListener("click", exportLog);
+          clearLogBtn.addEventListener("click", clearLog);
+        }
+
+        function chooseNodeCount() {
+          // fewer nodes on small screens for performance
+          if (window.innerWidth < 420) return 8;
+          if (window.innerWidth < 720) return 12;
+          return 18;
+        }
+
+        function onResize() {
+          const count = chooseNodeCount();
+          initNeuralNodes(count);
+          updateBrainwaveAnimation(speedRange ? speedRange.value : 80);
+        }
+
+        function init() {
+          setStatus("Idle");
+          setNet("Net idle");
+          log("neural interface ready");
+          initNeuralNodes(chooseNodeCount());
+          updateBrainwaveAnimation(80);
+          initEventListeners();
+          window.addEventListener("resize", debounce(onResize, 300));
+        }
+
+        // small debounce util
+        function debounce(fn, wait) {
+          let t = null;
+          return function () {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, arguments), wait);
+          };
+        }
+
+        init();
+      })();
+    </script>
+  </body>
+</html>
