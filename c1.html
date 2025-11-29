@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Light Pollution Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-dark: #1b1e26;
-    --bg-container: #2c3140;
-    --text-light: #e4e7f1;
-    --text-muted: #9097b5;
-    --accent: #c7cdf0;
-    --highlight: #ffb851;
-    --shadow: rgba(80,100,150,0.15);
-    --btn-bg: #ff9e1b;
-    --btn-hover: #ffb851;
-  }
+    :root {
+    --bg-dark: #11131a;
+    --bg-container: #1c1f27;
+    --text-light: #e8eaf4;
+    --text-muted: #9aa0b8;
+    --accent: #d5d9ff;
+    --highlight: #ffd789;
+    --shadow: rgba(0,0,0,0.35);
+    --btn-bg: #ffb758;
+    --btn-hover: #ffd789;
+    }
 
   body {
     margin: 0;
@@ -27,15 +27,15 @@
     scroll-behavior: smooth;
   }
 
-  /* HEADER */
   header {
-    padding: 30px 20px;
+    padding: 35px 20px;
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 700;
     color: var(--highlight);
-    background-color: #232635;
+    background: linear-gradient(135deg, #1c1f27, #222634);
+    letter-spacing: 1px;
   }
 
   .container {
@@ -44,16 +44,15 @@
     padding: 0 20px 50px 20px;
   }
 
-  /* POST CARDS */
   .post {
     background-color: var(--bg-container);
-    border-radius: 12px;
+    border-radius: 14px;
     margin-bottom: 50px;
     overflow: hidden;
-    box-shadow: 0 4px 20px var(--shadow);
+    box-shadow: 0 6px 22px var(--shadow);
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
   .post.visible {
@@ -66,28 +65,65 @@
     height: 300px;
     object-fit: cover;
     display: block;
+    filter: brightness(0.92);
+    transition: filter 0.3s ease;
   }
 
   .post-content {
-    padding: 25px 20px;
+    padding: 28px 22px;
   }
 
-  .post-content h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: var(--accent);
-    margin-bottom: 20px;
+  .post-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
   }
+
+    .post-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    }
+
+    .author-tag {
+    background-color: rgba(255,215,137,0.18);
+    color: var(--highlight);
+    border-radius: 50px;
+    padding: 6px 14px;
+    }
 
   .post-content p {
     font-size: 17px;
-    color: var(--text-light);
     margin-bottom: 18px;
   }
 
   .post-content ul {
     margin-left: 20px;
     margin-bottom: 20px;
+  }
+
+  /* CALL TO ACTION */
+    .cta {
+    background: linear-gradient(135deg, #1c1f27, #252938);
+    padding: 50px 35px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.06);
+    }
+
+  .cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--highlight);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .cta p {
+    font-size: 17px;
+    margin-bottom: 18px;
+    color: var(--text-light);
   }
 
   footer {
@@ -99,7 +135,6 @@
     margin-top: 50px;
   }
 
-  /* BACK TO TOP BUTTON */
   #backToTop {
     position: fixed;
     bottom: 25px;
@@ -125,51 +160,28 @@
     transform: translateY(-2px);
   }
 
-  /* MOBILE RESPONSIVE */
   @media (max-width: 768px) {
-    header {
-      font-size: 26px;
-      padding: 20px 15px;
-    }
-
-    .post-content h2 {
-      font-size: 22px;
-    }
-
-    .post-content p {
-      font-size: 16px;
-    }
-
-    .post img {
-      height: 200px;
-    }
-
-    #backToTop {
-      width: 45px;
-      height: 45px;
-      font-size: 20px;
-    }
+    header { font-size: 26px; padding: 20px 15px; }
+    .post-title h2 { font-size: 22px; }
+    .post img { height: 200px; }
   }
 
-  @media (max-width: 480px) {
-    .container {
-      margin: 30px auto;
-      padding: 0 15px 40px 15px;
-    }
-  }
 </style>
 </head>
 <body>
 
-<header>Light Pollution </header>
+<header>Caring for Our Common Sky, Accelerating Change and Solutions to Light Pollution</header>
 
 <div class="container">
 
   <div class="post">
     <img src="images/1.jpg" alt="City Night">
     <div class="post-content">
-      <h2>The Night I Realized How Bright Our Nights Have Become</h2>
-      <p>I was walking around Makati one evening after a long day, moving along with my sister while heading back home. Some people were still grabbing late dinners from food stalls, and the streets were glowing with headlights, signboards, and building lights. It was a typical urban night that is busy but familiar. At some point, while I was waiting to cross the street, I looked up without thinking. The sky above me had a faint grayish-orange glow, as if a sunrise trying to break through, only it wasn't sunrise. For a moment, I genuinely wondered, “Is it about to dawn already?” It felt strange, almost confusing. So I checked the time on my phone and it was just 8 p.m.</p>
+      <div class="post-title">
+        <h2>The Night I Realized How Bright Our Nights Have Become</h2>
+        <div class="author-tag">Krishna</div>
+      </div>
+      <p>I was walking around Makati one evening after a long day, moving along with my sister while heading back home. Some people were still grabbing late dinners from food stalls, and the streets were glowing with headlights, signboards, and building lights. It was a typical urban night that is busy but familiar. At some point, while I was waiting to cross the street, I looked up without thinking. The sky above me had a faint grayish-orange glow, as if a sunrise trying to break through, only it wasn't sunrise. For a moment, I genuinely wondered, <i>“Is it about to dawn already?” </i> It felt strange, almost confusing. So I checked the time on my phone and it was just 8 p.m.</p>
       <p>That tiny moment of confusion hit me harder than I expected. Why did the night sky look like that? Why did the darkness feel like a fraud? So artificial, so manufactured? Light pollution is a massive problem. Not the kind people talk about, but the kind you can literally see every day if you bother to look up.</p>
     </div>
   </div>
@@ -177,20 +189,23 @@
   <div class="post">
     <img src="images/2.jpg" alt="Starless Sky">
     <div class="post-content">
-      <h2>A Sky With No Stars</h2>
-      <p>Growing up, you might remember nights when stars actually dotted the sky, something kids today barely get to see if they live in Metro Manila. In Makati that night, there wasn't a single visible star. The brightness coming from buildings, streetlights, billboards, and even cars was bouncing off the clouds so intensely that it erased the night sky entirely.</p>
-      <p>Curious of me and a little bothered, I searched on my phone right there on the sidewalk. Recent studies after study, talking about how severe light pollution has become globally and how fast it's increasing. Yet despite all this information, it still feels like an invisible issue. We just assume cities are supposed to be bright and that seeing stars is something reserved for rural provinces. We've normalized it so much that we don't question it anymore.
-</p>
+      <div class="post-title">
+        <h2>A Sky With No Stars</h2>
+        <div class="author-tag">Seya</div>
+      </div>
+      <p>Growing up, I remembered nights when stars actually dotted the sky, something kids today barely get to see if they live in Metro Manila. In Makati that night, there wasn't a single visible star. The brightness coming from buildings, streetlights, billboards, and even cars was bouncing off the clouds so intensely that it erased the night sky entirely.</p>
+      <p>Curious of me and a little bothered, I searched on my phone right there on the sidewalk. Recent studies after study, talking about how severe light pollution has become globally and how fast it's increasing. Yet despite all this information, it still feels like an invisible issue. We just assume cities are supposed to be bright and that seeing stars is something reserved for rural provinces. We've normalized it so much that we don't question it anymore.</p>
     </div>
   </div>
 
   <div class="post">
     <img src="images/3.jpg" alt="Health Effects">
     <div class="post-content">
-      <h2>More Than Brightness, The Hidden Effects on Humans</h2>
+      <div class="post-title">
+        <h2>More Than Brightness, The Hidden Effects on Humans</h2>
+      </div>
       <p>One thing I realized that night is that light pollution isn't only about ruined stargazing. It affects us far more deeply than we know.</p>
-      <p>Artificial light, especially at night, disrupts our circadian rhythm, that is the body's internal clock that tells us when to sleep and when to wake up. When the environment is bright even after sunset, our brains struggle to release melatonin, the hormone that helps us sleep. Over time, this can lead to:
-</p>
+      <p>Artificial light, especially at night, disrupts our circadian rhythm, that is the body's internal clock that tells us when to sleep and when to wake up. When the environment is bright even after sunset, our brains struggle to release melatonin, the hormone that helps us sleep. Over time, this can lead to:</p>
       <ul>
         <li>Chronic sleep disorders</li>
         <li>Metabolic problems</li>
@@ -205,7 +220,9 @@
   <div class="post">
     <img src="https://preview.redd.it/q0if4aj9oyj41.jpg?width=1080&crop=smart&auto=webp&s=791ff01bc658794c15a54706130b972e22010088" alt="Wildlife Impact">
     <div class="post-content">
-      <h2>What We Don't See Hurts More Than We Think</h2>
+      <div class="post-title">
+        <h2>What We Don't See Hurts More Than We Think</h2>
+      </div>
       <p>Light pollution also affects wildlife in ways most city-dwellers never witness.
 Migratory birds rely on natural light patterns to navigate, and overly bright cities cause them to lose their direction. Insects, which are essential for pollination and the food chain, die in overwhelming numbers around artificial lights. Nocturnal animals who depend on darkness to hunt, hide, or reproduce often find themselves disoriented and vulnerable. Urban areas, especially ones as busy as Makati, create a constant artificial “daytime” that some animals simply can't survive.</p>
     </div>
@@ -214,33 +231,37 @@ Migratory birds rely on natural light patterns to navigate, and overly bright ci
   <div class="post">
     <img src="https://i0.wp.com/hyperallergic-newspack.s3.amazonaws.com/uploads/2023/05/B-PR-LightsOut-5-E1-3512P-BabakTafreshi-TWAN.jpg?resize=1536%2C1018&quality=90&ssl=1" alt="Looking Up">
     <div class="post-content">
-      <h2>A Simple Look Up</h2>
-      <p>It's almost funny how something so small, by simply just looking up at the sky, can make you rethink your environment. That 8 p.m. moment showed me how much the world has changed without us even noticing. The sky we grew up with is no longer the sky we live under. We worry about pollution we can smell or touch; smog, dirty water, trash on the street. But the kind we ignore the most is the one we can't physically feel: the slow fading of our nights, the erasure of stars, the artificial glow that convinces us it's already morning. Light pollution is quiet, and because it doesn't inconvenience us directly, we tend to overlook it. But it's shaping our health, altering ecosystems, and disconnecting us from something as simple and universal as the night sky.</p>
-      <p>That night in Makati, I realized the sky isn't supposed to look like that. And maybe the first step in addressing it is acknowledging what we've lost. And what we're still losing, every time the city lights flicker on.</p>
+      <div class="post-title">
+        <h2>A Simple Look Up</h2>
+        <div class="author-tag">Zoe</div>
+      </div>
+      <p>It's almost funny how something so small, by simply just looking up at the sky, can make you rethink your environment. There was a moment at 7 p.m. on top of a condominium tower, where it all hit me. It was a moment that showed me how much the world has changed without us even noticing. The sky we grew up with is no longer the sky we live under. We worry about pollution we can smell or touch; smog, dirty water, trash on the street. But the kind we ignore the most is the one we can't physically feel: the slow fading of our nights, the erasure of stars, the artificial glow that convinces us it's already morning. Light pollution is quiet, and because it doesn't inconvenience us directly, we tend to overlook it. But it's shaping our health, altering ecosystems, and disconnecting us from something as simple and universal as the night sky.</p>
+      <p>That night in that tower, I realized the sky isn't supposed to look like that. And maybe the first step in addressing it is acknowledging what we've lost. And what we're still losing, every time the city lights flicker on.</p>
     </div>
+  </div>
+
+  <div class="cta">
+    <h2>Call to Action</h2>
+    <p>That's the real question. Light pollution isn't a problem we can leave to scientists or environmental groups alone. It's a daily issue created by all of us simply because we've accepted that cities must be extremely bright. But that mindset is exactly what needs to change. We need to start small. Notice the lights around you in your home, your school, your workplace, your neighborhood. Are they brighter than they need to be? Are they left on even when no one is using them? These sound like tiny things, but multiplied across an entire city, they make a massive difference.</p>
+    <p>Talk about light pollution with friends or classmates. It's surprising how many people have never even heard of it. And most importantly, challenge yourself to care. You don't have to be an activist to protect the night. You just have to be someone who refuses to let the stars disappear quietly. If we don't act, the night sky will continue to fade until future generations grow up thinking stars are something you only seein pictures. But if we choose to pay attention; if we choose to demand better lighting, smarter cities, and healthier nights. Then maybe, someday, an 8 p.m. sky won't look like dawn.</p>
+    <p>It starts with awareness. It continues with action. And it begins the moment you decide the darkness deserves to be seen again.</p>
   </div>
 
 </div>
 
 <footer>© 2025 Light Pollution Blog | Assumption College</footer>
 
-<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">&#8593;</button>
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
 
 <script>
 const posts = document.querySelectorAll('.post');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
-      // Add 'visible' to animate
-      entry.target.classList.add('visible');
-    }
-    // Optional: remove if you want re-animations
-    else {
-      entry.target.classList.remove('visible');
-    }
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+    else { entry.target.classList.remove('visible'); }
   });
-}, { threshold: 0.15 }); // slightly higher threshold helps trigger when more of post is visible
+}, { threshold: 0.15 });
 
 posts.forEach(post => observer.observe(post));
 </script>
