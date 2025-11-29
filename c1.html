@@ -161,33 +161,34 @@
   }
 
     .header-wrapper {
-      position: relative;
-      text-align: center; /* Center content */
+      display: flex;
+      flex-direction: column; /* stack header and subtitle */
+      align-items: center;    /* center horizontally */
+      justify-content: center;
+      width: 100%;            /* full width of container */
       margin-bottom: 30px;
     }
     
     .header-wrapper header {
-      display: inline-block;
-      position: relative;
       font-size: 36px;
       color: var(--highlight);
       font-family: 'Playfair Display', serif;
+      text-align: center;
     }
     
     .author-tag-small {
-      display: inline-block;
       margin-top: 10px;
       padding: 8px 20px;
       font-size: 16px;
       font-weight: 600;
       letter-spacing: 0.5px;
       color: #11131a;
-      background: linear-gradient(90deg, #ffd789, #ffb758); /* subtle gradient */
+      background: linear-gradient(90deg, #ffd789, #ffb758);
       border-radius: 25px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.25);
       text-transform: uppercase;
+      text-align: center;
     }
-
 
   @media (max-width: 768px) {
     header { font-size: 26px; padding: 20px 15px; }
@@ -203,7 +204,6 @@
   <header>Too Bright for Our Own Good</header>
   <div class="author-tag-small">S.T.A.R.: Share Truth And Responsibility</div>
 </div>
-
 
 <div class="container">
 
@@ -301,6 +301,7 @@ posts.forEach(post => observer.observe(post));
 
 </body>
 </html>
+
 
 
 
