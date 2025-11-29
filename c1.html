@@ -160,6 +160,24 @@
     transform: translateY(-2px);
   }
 
+    .header-wrapper {
+    position: relative;
+    display: inline-block;
+    }
+    
+    .author-tag-small {
+    position: absolute;
+    bottom: -8px;
+    right: 0;
+    font-size: 14px;
+    color: var(--highlight);
+    background-color: rgba(255,215,137,0.12);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    }
+
   @media (max-width: 768px) {
     header { font-size: 26px; padding: 20px 15px; }
     .post-title h2 { font-size: 22px; }
@@ -170,8 +188,7 @@
 </head>
 <body>
 
-<header>Caring for Our Common Sky, Accelerating Change and Solutions to Light Pollution</header>
-    <div class="author-tag">S.T.A.R.: Share Truth And Responsibility</div>
+<div class="header-wrapper"> <header>Too Bright for Our Own Good</header> <div class="author-tag-small">S.T.A.R.: Share Truth And Responsibility</div> </div>
 
 <div class="container">
 
@@ -269,4 +286,5 @@ posts.forEach(post => observer.observe(post));
 
 </body>
 </html>
+
 
