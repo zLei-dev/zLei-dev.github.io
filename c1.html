@@ -203,6 +203,32 @@
   transform: translateY(-2px);
 }
 
+.references-box {
+  width: 100%
+  max-width: 800px
+  margin: 40px auto
+  padding: 20px
+  background: rgba(255,215,137,0.1)
+  border: 1px solid rgba(255,215,137,0.3)
+  border-radius: 8px
+}
+
+.references-box h2 {
+  margin-bottom: 12px
+  color: var(--highlight)
+  font-size: 28px
+}
+
+.references-box ul {
+  padding-left: 20px
+  line-height: 1.5
+  color: var(--text)
+}
+
+.references-box li {
+  margin-bottom: 8px
+}
+
   @media (max-width: 768px) {
     header { font-size: 26px; padding: 20px 15px; }
     .post-title h2 { font-size: 22px; }
@@ -251,7 +277,7 @@
         <h2>More Than Brightness, The Hidden Effects on Humans</h2>
       </div>
       <p>One thing I realized that night is that light pollution isn't only about ruined stargazing. It affects us far more deeply than we know.</p>
-      <p>Artificial light, especially at night, disrupts our circadian rhythm, that is the body's internal clock that tells us when to sleep and when to wake up. When the environment is bright even after sunset, our brains struggle to release melatonin, the hormone that helps us sleep. Over time, this can lead to:</p>
+      <p>According to DarkSky (2025), Artificial light disrupts our circadian rhythm, that is the body’s internal clock that tells us when to sleep and when to wake up. When the environment is bright even after sunset, our brains struggle to release melatonin, the hormone that helps us sleep. Over time, this can lead to:</p>
       <ul>
         <li>Chronic sleep disorders</li>
         <li>Metabolic problems</li>
@@ -295,6 +321,13 @@ Migratory birds rely on natural light patterns to navigate, and overly bright ci
 
 </div>
 
+<div class="references-box">
+  <h2>References</h2>
+  <ul>
+    <li>DarkSky International. (9/8/2017.). Natural darkness and human well-being. https://darksky.org/resources/what-is-light-pollution/effects/human-health/</li>
+  </ul>
+</div>
+
 <footer>© 2025 Light Pollution Blog | Assumption College</footer>
 
 <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
@@ -314,6 +347,7 @@ posts.forEach(post => observer.observe(post));
 
 </body>
 </html>
+
 
 
 
