@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Night Bloom</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top, #18253d, #050811);
+    overflow: hidden;
+}
+
+#camera {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#scene {
+    position: relative;
+    width: 360px;
+    height: 560px;
+}
+
+.vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, transparent 45%, rgba(0,0,0,0.65));
+}
+
+.moon {
+    position: absolute;
+    top: -40px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #9fb6ff 60%, transparent 70%);
+    filter: blur(2px);
+    opacity: 0.9;
+}
+
+.moon-glow {
+    position: absolute;
+    top: -120px;
+    right: -140px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(150,180,255,0.18), transparent 65%);
+}
+
+.cloud {
+    position: absolute;
+    width: 260px;
+    height: 90px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    filter: blur(22px);
+}
+
+#pot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px;
+    height: 120px;
+    background: linear-gradient(to bottom, #6a4a32, #2f1a10);
+    border-radius: 0 0 28px 28px;
+}
+
+#pot::before {
+    content: "";
+    position: absolute;
+    top: -28px;
+    left: -14px;
+    width: 218px;
+    height: 34px;
+    background: #855c40;
+    border-radius: 16px;
+}
+
+#pot-text {
+    position: absolute;
+    bottom: 42px;
+    width: 100%;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: rgba(0,0,0,0.45);
+    text-shadow:
+        inset 0 2px 2px rgba(255,255,255,0.2),
+        0 1px 0 rgba(0,0,0,0.6);
+}
+
+#seed {
+    position: absolute;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #24160d;
+    border-radius: 50%;
+}
+
+#stem {
+    position: absolute;
+    bottom: 84px;
+    left: 50%;
+    width: 6px;
+    height: 0;
+    background: linear-gradient(to top, #1c6b3c, #7ee3a4);
+    transform: translateX(-50%);
+    transform-origin: bottom;
+}
+
+.leaf {
+    position: absolute;
+    width: 44px;
+    height: 22px;
+    background: linear-gradient(to right, #3f9d61, #a6f0c8);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+#leaf-left {
+    left: -38px;
+    top: 190px;
+    transform: rotate(-32deg);
+}
+
+#leaf-right {
+    right: -38px;
+    top: 240px;
+    transform: rotate(32deg);
+}
+
+#flower {
+    position: absolute;
+    bottom: 70%; /* sit at the tip of the stem */
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    transform-origin: center bottom; /* rotate/scale around base */
+    filter: drop-shadow(0 0 22px rgba(255,160,210,0.7));
+}
+
+.petal-back,
+.petal-front {
+    opacity: 0;
+    transform-origin: center bottom;
+}
+
+#core {
+    opacity: 0;
+    filter: drop-shadow(0 0 18px rgba(255,220,140,1));
+}
+
+.firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #fff6b0, rgba(255,246,176,0.2));
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0;
+}
+
+#final-text {
+    position: absolute;
+    bottom: 160px;
+    width: 100%;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: rgba(255,230,240,0.9);
+    opacity: 0;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div id="camera">
+<div id="scene">
+
+    <div class="moon-glow"></div>
+    <div class="moon"></div>
+
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+
+    <div id="seed"></div>
+
+    <div id="stem">
+        <div id="leaf-left" class="leaf"></div>
+        <div id="leaf-right" class="leaf"></div>
+
+<div id="flower">
+<svg width="240" height="240" viewBox="0 0 240 240">
+<defs>
+<radialGradient id="petalBackGrad">
+<stop offset="0%" stop-color="#ffe4f2"/>
+<stop offset="100%" stop-color="#ff6fb5"/>
+</radialGradient>
+
+<radialGradient id="petalFrontGrad">
+<stop offset="0%" stop-color="#fff2f9"/>
+<stop offset="100%" stop-color="#ff9fd3"/>
+</radialGradient>
+</defs>
+
+<g transform="translate(120 120)">
+<!-- back layer -->
+<g class="petal-back">
+<ellipse rx="28" ry="62" fill="url(#petalBackGrad)" transform="rotate(0) translate(0 -50)"/>
+<ellipse rx="28" ry="62" fill="url(#petalBackGrad)" transform="rotate(72) translate(0 -50)"/>
+<ellipse rx="28" ry="62" fill="url(#petalBackGrad)" transform="rotate(144) translate(0 -50)"/>
+<ellipse rx="28" ry="62" fill="url(#petalBackGrad)" transform="rotate(216) translate(0 -50)"/>
+<ellipse rx="28" ry="62" fill="url(#petalBackGrad)" transform="rotate(288) translate(0 -50)"/>
+</g>
+
+<!-- front layer -->
+<g class="petal-front">
+<ellipse rx="22" ry="48" fill="url(#petalFrontGrad)" transform="rotate(36) translate(0 -38)"/>
+<ellipse rx="22" ry="48" fill="url(#petalFrontGrad)" transform="rotate(108) translate(0 -38)"/>
+<ellipse rx="22" ry="48" fill="url(#petalFrontGrad)" transform="rotate(180) translate(0 -38)"/>
+<ellipse rx="22" ry="48" fill="url(#petalFrontGrad)" transform="rotate(252) translate(0 -38)"/>
+<ellipse rx="22" ry="48" fill="url(#petalFrontGrad)" transform="rotate(324) translate(0 -38)"/>
+</g>
+
+<circle id="core" r="20" fill="#ffdd77"/>
+</g>
+</svg>
+</div>
+
+    </div>
+
+    <div id="final-text">I will always choose you</div>
+
+    <div id="pot">
+        <div id="pot-text">I love you</div>
+    </div>
+
+</div>
+</div>
+
+<div class="vignette"></div>
+
+<script>
+const tl = gsap.timeline();
+
+tl.to("#seed", { scale: 0, duration: 1 })
+  .to("#stem", { height: 340, duration: 3.2 })
+  .to(".leaf", { opacity: 1, duration: 1 })
+  .to("#flower", { scale: 1, duration: 1.6 })
+  .to(".petal-back", { opacity: 1, duration: 1, stagger: 0.1 })
+  .to(".petal-front", { opacity: 1, duration: 1, stagger: 0.1 })
+  .to("#core", { opacity: 1, duration: 0.6 })
+  .to("#final-text", { opacity: 1, duration: 4, delay: 2 });
+
+gsap.to("#stem", { rotate: 6, duration: 7, repeat: -1, yoyo: true });
+gsap.to("#flower", { rotate: 4, duration: 10, repeat: -1, yoyo: true });
+gsap.to(".leaf", { rotate: "+=14", duration: 6, repeat: -1, yoyo: true });
+gsap.to("#camera", { scale: 1.1, duration: 22, repeat: -1, yoyo: true });
+
+document.querySelectorAll(".cloud").forEach((c, i) => {
+    gsap.set(c, { y: 40 + i * 60, x: -400 - i * 200 });
+    gsap.to(c, { x: 1200, duration: 90 + i * 20, repeat: -1, ease: "none" });
+});
+
+for (let i = 0; i < 16; i++) {
+    const f = document.createElement("div");
+    f.className = "firefly";
+    document.body.appendChild(f);
+
+    gsap.set(f, {
+        x: Math.random() * window.innerWidth,
+        y: 300 + Math.random() * 300
+    });
+
+    gsap.to(f, {
+        opacity: 1,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        delay: Math.random() * 4
+    });
+    
+    gsap.to(".petal-front ellipse", {
+        scaleY: 1.05,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+    });
+
+    gsap.to(f, {
+        x: "+=" + (Math.random() * 80 - 40),
+        y: "+=" + (Math.random() * 60 - 30),
+        duration: 6 + Math.random() * 4,
+        repeat: -1,
+        yoyo: true
+    });
+}
+</script>
+
+</body>
+</html>
