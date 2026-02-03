@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magical Bouquet</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top, #18253d, #050811);
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#garden { position: relative; width: 100%; height: 100%; }
+
+.flower-container {
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column-reverse; /* Stem below flower */
+    align-items: center;
+    transform-origin: center bottom;
+}
+
+.flower-glow {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.toolbox {
+    margin-bottom: 15px;
+    background: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
+    transition: transform 0.3s, opacity 0.3s;
+    z-index: 10; /* Ensure on top */
+}
+.toolbox button {
+    background: #ff8fc4;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+.toolbox button:hover { transform: scale(1.1); }
+
+#message-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 18px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #333;
+    display: none;
+    text-align: center;
+    min-width: 220px;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    transform: rotate(45deg);
+    opacity: 0.8;
+    border-radius: 50%;
+}
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    border-radius: 50%;
+}
+.heart::before { top: -10px; left: 0; }
+.heart::after { left: 10px; top: 0; }
+</style>
+</head>
+<body>
+<div id="garden"></div>
+<div id="message-popup"></div>
+
+<!-- Music -->
+<audio id="flower1" src="songs/flower1.mp3"></audio>
+<audio id="flower2" src="songs/flower2.mp3"></audio>
+<audio id="flower3" src="songs/flower3.mp3"></audio>
+<audio id="flower4" src="songs/flower4.mp3"></audio>
+<audio id="flower5" src="songs/flower5.mp3"></audio>
+
+<script>
+const flowersData = [
+    {note:"💌 Me leaving you? funny.", Apology:"🌸 Sorry", audioId:"flower1", back:"#ffe4f2,#ff6fb5", front:"#fff2f9,#ff9fd3"},
+    {note:"💌 I miss you", Apology:"🌸 My bad", audioId:"flower2", back:"#e4ffe4,#6fff6f", front:"#f2fff2,#9fff9f"},
+    {note:"💌 My thoughts are full of you", Apology:"🌸 Forgive me", audioId:"flower3", back:"#fff0b6,#ffdb6f", front:"#fff8e5,#ffe79f"},
+    {note:"💌 You'll always be my baby", Apology:"🌸 Me give hug", audioId:"flower4", back:"#d4e0ff,#6faaff", front:"#e8f0ff,#9fd3ff"},
+    {note:"💌 I'll always be yours.", Apology:"🌸 Sorry :(", audioId:"flower5", back:"#ffd4f0,#ff6fa1", front:"#ffe8f5,#ff9fd3"}
+];
+
+const garden = document.getElementById('garden');
+const popup = document.getElementById('message-popup');
+
+function createFlower(flowerData,index,total){
+    const container = document.createElement('div');
+    container.className='flower-container';
+
+    // Horizontal line, slightly above center
+    const spacing = window.innerWidth / (total + 1);
+    container.style.left = spacing*(index+1) - 70 + 'px'; 
+    container.style.top = window.innerHeight/2 - 180 + 'px';
+
+    // Glow
+    const glow = document.createElement('div'); glow.className='flower-glow';
+    glow.style.background="radial-gradient(circle,"+flowerData.back.split(",")[1]+",transparent)";
+    container.appendChild(glow);
+
+    // Toolbox (above flower)
+    const toolbox=document.createElement('div');
+    toolbox.className='toolbox';
+    const btnNote=document.createElement('button'); btnNote.innerText="Love Note";
+    const btnApology=document.createElement('button'); btnApology.innerText="Apology";
+    toolbox.appendChild(btnNote); toolbox.appendChild(btnApology);
+    container.appendChild(toolbox);
+
+    // Flower SVG
+    const svgNS="http://www.w3.org/2000/svg";
+    const svg=document.createElementNS(svgNS,"svg"); svg.setAttribute("viewBox","0 0 240 240"); svg.style.marginBottom="-40px";
+    const defs=document.createElementNS(svgNS,"defs");
+
+    const petalBackGrad=document.createElementNS(svgNS,"radialGradient");
+    petalBackGrad.id="petalBackGrad"+index;
+    petalBackGrad.innerHTML=`<stop offset="0%" stop-color="${flowerData.back.split(",")[0]}"/><stop offset="100%" stop-color="${flowerData.back.split(",")[1]}"/>`;
+    defs.appendChild(petalBackGrad);
+
+    const petalFrontGrad=document.createElementNS(svgNS,"radialGradient");
+    petalFrontGrad.id="petalFrontGrad"+index;
+    petalFrontGrad.innerHTML=`<stop offset="0%" stop-color="${flowerData.front.split(",")[0]}"/><stop offset="100%" stop-color="${flowerData.front.split(",")[1]}"/>`;
+    defs.appendChild(petalFrontGrad);
+
+    svg.appendChild(defs);
+
+    const g=document.createElementNS(svgNS,"g"); g.setAttribute("transform","translate(120 120)");
+
+    const petalBackGroup=document.createElementNS(svgNS,"g"); petalBackGroup.setAttribute("class","petal-back");
+    for(let i=0;i<5;i++){
+        const e=document.createElementNS(svgNS,"ellipse");
+        e.setAttribute("rx",28); e.setAttribute("ry",62);
+        e.setAttribute("fill","url(#"+petalBackGrad.id+")");
+        e.setAttribute("transform",`rotate(${i*72}) translate(0 -50)`);
+        petalBackGroup.appendChild(e);
+    }
+    g.appendChild(petalBackGroup);
+
+    const petalFrontGroup=document.createElementNS(svgNS,"g"); petalFrontGroup.setAttribute("class","petal-front");
+    for(let i=0;i<5;i++){
+        const e=document.createElementNS(svgNS,"ellipse");
+        e.setAttribute("rx",22); e.setAttribute("ry",48);
+        e.setAttribute("fill","url(#"+petalFrontGrad.id+")");
+        e.setAttribute("transform",`rotate(${36+i*72}) translate(0 -38)`);
+        petalFrontGroup.appendChild(e);
+    }
+    g.appendChild(petalFrontGroup);
+
+    const core=document.createElementNS(svgNS,"circle"); core.setAttribute("r",20); core.setAttribute("fill","#ffdd77");
+    g.appendChild(core);
+
+    svg.appendChild(g);
+    container.appendChild(svg);
+
+    // Leaves under flower
+    const leafLeft=document.createElement('div'); 
+    leafLeft.style.width="40px"; leafLeft.style.height="20px";
+    leafLeft.style.background="linear-gradient(to right, #3f9d61, #a6f0c8)";
+    leafLeft.style.position="absolute"; leafLeft.style.left="-35px"; leafLeft.style.bottom="70px";
+    leafLeft.style.borderRadius="50%"; leafLeft.style.transform="rotate(-30deg)"; container.appendChild(leafLeft);
+
+    const leafRight=document.createElement('div'); 
+    leafRight.style.width="40px"; leafRight.style.height="20px";
+    leafRight.style.background="linear-gradient(to right, #3f9d61, #a6f0c8)";
+    leafRight.style.position="absolute"; leafRight.style.right="-35px"; leafRight.style.bottom="70px";
+    leafRight.style.borderRadius="50%"; leafRight.style.transform="rotate(30deg)"; container.appendChild(leafRight);
+
+    // Stem (under flower)
+    const stem=document.createElement('div');
+    stem.style.width="6px"; stem.style.height="120px"; stem.style.background="linear-gradient(to top,#1c6b3c,#7ee3a4)";
+    stem.style.borderRadius="3px"; container.appendChild(stem);
+
+    garden.appendChild(container);
+
+    // Petal sway
+    gsap.to(petalFrontGroup.children,{scaleY:1.05,duration:3,repeat:-1,yoyo:true,ease:"sine.inOut"});
+    gsap.to(container,{rotate:Math.random()*4-2,duration:5+Math.random()*3,repeat:-1,yoyo:true});
+
+    // Hover bloom
+    container.addEventListener("mouseenter",()=>{
+        gsap.to(svg,{scale:1.25,duration:0.4,ease:"elastic.out(1,0.5)"});
+        gsap.to(toolbox,{scale:1,opacity:1,pointerEvents:"auto",duration:0.3});
+        gsap.to(glow,{opacity:0.7,duration:0.4});
+    });
+    container.addEventListener("mouseleave",()=>{
+        gsap.to(svg,{scale:1,duration:0.3,ease:"power1.out"});
+        gsap.to(toolbox,{scale:0,opacity:0,pointerEvents:"none",duration:0.3});
+        gsap.to(glow,{opacity:0.4,duration:0.3});
+    });
+
+    // Toolbox click events
+    btnNote.addEventListener("click",(e)=>{ e.stopPropagation(); playAudio(flowerData.audioId); showMessage(flowerData.note); });
+    btnApology.addEventListener("click",(e)=>{ e.stopPropagation(); playAudio(flowerData.audioId); showMessage(flowerData.Apology); });
+}
+
+function showMessage(msg){
+    popup.innerText=msg;
+    popup.style.display="block";
+    gsap.fromTo(popup,{scale:0.8,opacity:0},{scale:1,opacity:1,duration:0.4});
+    setTimeout(()=>{ gsap.to(popup,{scale:0.8,opacity:0,duration:0.3,onComplete:()=>popup.style.display="none"}); },5000);
+}
+
+// Floating hearts
+function createHeart(){
+    const heart=document.createElement('div'); heart.className="heart";
+    heart.style.left=Math.random()*95+"vw";
+    heart.style.top=window.innerHeight+"px";
+    heart.style.width=10+Math.random()*15+"px";
+    heart.style.height=heart.style.width;
+    document.body.appendChild(heart);
+    gsap.to(heart,{y:-window.innerHeight/2,duration:12+Math.random()*3,opacity:0,rotation:Math.random()*360,ease:"power1.out",onComplete:()=>heart.remove()});
+}
+setInterval(createHeart,400);
+
+// Music
+let currentAudio=null;
+function playAudio(id){
+    if(currentAudio && !currentAudio.paused) currentAudio.pause();
+    currentAudio=document.getElementById(id);
+    currentAudio.currentTime=0;
+    currentAudio.play();
+}
+
+// Create flowers
+flowersData.forEach((f,i)=>createFlower(f,i,flowersData.length));
+</script>
+</body>
+</html>
