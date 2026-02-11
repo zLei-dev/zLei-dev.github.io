@@ -1,11 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #ffd6e8, #fff0f5);
+    overflow-x: hidden;
+    text-align: center;
+    color: #6b2d4a;
+}
+
+/* Floating hearts */
+.heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp 8s linear infinite; opacity: 0.6; }
+@keyframes floatUp { 0% { transform: translateY(0); opacity:0.6;} 100% { transform: translateY(-110vh); opacity:0;} }
+
+.container { padding: 40px 20px; }
+.hidden { display: none; }
+h2 { font-family: 'Playfair Display', serif; }
+
+/* PASSCODE */
+.passcode-dots { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
+.dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ff6fa5; }
+.dot.filled { background: #ff4d88; }
+.keypad { display: grid; grid-template-columns: repeat(3, 80px); gap: 15px; justify-content: center; }
+.key { width: 80px; height: 80px; border-radius: 50%; border: none; background:white; font-size:22px; color:#ff4d88; box-shadow:0 6px 15px rgba(255,105,150,0.3); cursor:pointer; }
+.key:active { transform: scale(0.95); }
+
+/* MENU MODAL */
+.menu-button { padding: 14px 24px; border-radius:30px; border:none; background:linear-gradient(to right,#ff6fa5,#ff4d88); color:white; font-size:16px; cursor:pointer; box-shadow:0 8px 25px rgba(255,105,150,0.3); margin:10px; }
+.menu-button:hover { opacity:0.9; }
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,182,193,0.85); backdrop-filter:blur(5px); justify-content:center; align-items:center; z-index:10; }
+.modal-content { background:#fff0f5; border-radius:25px; padding:40px 30px; width:90%; max-width:450px; box-shadow:0 15px 35px rgba(255,105,150,0.3); display:flex; flex-direction:column; gap:20px; text-align:center; align-items:center; }
+.modal-content h3 { margin-bottom:10px; }
+.modal-content button { width:80%; padding:14px; border-radius:25px; border:none; background:linear-gradient(to right,#ff6fa5,#ff4d88); color:white; font-size:16px; cursor:pointer; transition: transform 0.2s; }
+.modal-content button:hover { transform: scale(1.05); }
+
+/* LETTER PAPER */
+.letter-paper { max-width:700px; margin:30px auto; padding:40px 35px; background:#fffaf0; border-radius:20px; box-shadow:0 15px 35px rgba(255,105,150,0.25); font-family:'Amatic SC', cursive; font-size:22px; line-height:1.8; text-align:left; position:relative; }
+.letter-paper::before { content:''; position:absolute; top:15px; left:15px; width:calc(100%-30px); height:calc(100%-30px); border:2px dashed #ffb6c1; border-radius:18px; }
+
+/* 3D Carousel */
+/* Carousel wrapper */
+.carousel-wrapper {
+    perspective: 1200px;
+    width: 300px;
+    height: 400px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Carousel container */
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+/* Carousel images */
+.carousel-container img {
+    position: absolute;
+    max-width: 200px;
+    max-height: 350px;
+    width: auto;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform-origin: center center;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255,105,150,0.25);
+    cursor: pointer;
+    transition: transform 0.6s ease;
+}
+
+.carousel-controls { display:flex; justify-content: space-between; margin-top:10px; width:220px; margin-left:auto; margin-right:auto; }
+.carousel-controls button { padding:10px 18px; border-radius:20px; border:none; background:linear-gradient(to right,#ff6fa5,#ff4d88); color:white; cursor:pointer; font-size:14px; }
+
+/* Hint */
+#error { color:#ff4d88; margin-top:20px; font-size:14px; }
+</style>
 </head>
+
 <body>
-    
+<script>
+for(let i=0;i<15;i++){ let h=document.createElement("div"); h.className="heart"; h.innerHTML="❤"; h.style.left=Math.random()*100+"vw"; h.style.animationDuration=(5+Math.random()*5)+"s"; h.style.fontSize=(15+Math.random()*25)+"px"; document.body.appendChild(h);}
+</script>
+
+<div class="container">
+<div id="lock">
+    <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" width="100">
+    <h2>Enter our anniversary</h2>
+    <div class="passcode-dots">
+        <div class="dot" id="dot1"></div>
+        <div class="dot" id="dot2"></div>
+        <div class="dot" id="dot3"></div>
+        <div class="dot" id="dot4"></div>
+    </div>
+    <div class="keypad">
+        <button class="key" onclick="press(1)">1</button>
+        <button class="key" onclick="press(2)">2</button>
+        <button class="key" onclick="press(3)">3</button>
+        <button class="key" onclick="press(4)">4</button>
+        <button class="key" onclick="press(5)">5</button>
+        <button class="key" onclick="press(6)">6</button>
+        <button class="key" onclick="press(7)">7</button>
+        <button class="key" onclick="press(8)">8</button>
+        <button class="key" onclick="press(9)">9</button>
+        <div></div>
+        <button class="key" onclick="press(0)">0</button>
+        <button class="key" onclick="clearCode()">⌫</button>
+    </div>
+    <p id="error"></p>
+</div>
+
+<div id="main" class="hidden">
+<h2>Welcome my love</h2>
+<button class="menu-button" onclick="openModal()">Open Menu</button>
+
+<div id="menuModal" class="modal">
+    <div class="modal-content">
+        <h3>Our Special Options</h3>
+        <button onclick="showSection('memories'); closeModal()">Our Memories</button>
+        <button onclick="showSection('letter'); closeModal()">My Letter</button>
+        <button onclick="downloadPoem()">Download Poem</button>
+        <button onclick="closeModal()" style="background:#ffb6c1;">Close</button>
+    </div>
+</div>
+
+<!-- 3D Carousel -->
+<div id="memories" class="hidden">
+<h3>Our Memories</h3>
+<div class="carousel-wrapper">
+    <div class="carousel-container" id="carouselContainer"></div>
+</div>
+<div class="carousel-controls">
+    <button onclick="prevImage()">Back</button>
+    <button onclick="nextImage()">Next</button>
+</div>
+</div>
+
+<!-- Letter -->
+<div id="letter" class="hidden">
+<h3>My Letter For You</h3>
+<div class="letter-paper">
+  <p>My Krishy,</p>
+
+  <p>Every moment with you reminds me why I choose you, again and again.<br>
+  Through laughter, through worries, through everything in between,<br>
+  I want you to feel my hands holding yours, your warmth against mine.</p>
+
+  <p>No matter the storms we face, remember this: us against the chaos.<br>
+  You are my home, my heart, my safe place.<br>
+  I will cherish you, honor you, and stand by you in every small and big way.</p>
+
+  <p>Always and only yours,</p>
+  <p>Andie</p>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+let inputCode="";
+function press(n){ if(inputCode.length<4){ inputCode+=n; updateDots();} if(inputCode.length===4) checkCode();}
+function updateDots(){ for(let i=1;i<=4;i++){ document.getElementById("dot"+i).classList.toggle("filled",i<=inputCode.length); }}
+function clearCode(){ inputCode=inputCode.slice(0,-1); updateDots();}
+function checkCode(){ if(inputCode==="0705"){ document.getElementById("lock").classList.add("hidden"); document.getElementById("main").classList.remove("hidden"); renderCarousel();} else{ document.getElementById("error").innerText="Hint: our anniversary date mm/dd"; inputCode=""; updateDots();}}
+
+function openModal(){ document.getElementById("menuModal").style.display="flex"; }
+function closeModal(){ document.getElementById("menuModal").style.display="none"; }
+function showSection(s){ document.getElementById("memories").classList.add("hidden"); document.getElementById("letter").classList.add("hidden"); document.getElementById(s).classList.remove("hidden"); }
+function downloadPoem() {
+    const link = document.createElement("a");
+    link.href = "stf/for_you.pdf";
+    link.click();
+}
+
+/* 3D Carousel */
+const carouselImgs = ["stf/img1.JPG","stf/img2.PNG","stf/img3.JPG", "stf/img4.JPG","stf/img5.JPG","stf/img6.JPG"];
+let currentIndex = 0;
+const radius = 180; // smaller distance so images don't overlap buttons
+
+function renderCarousel() {
+    const container = document.getElementById("carouselContainer");
+    container.innerHTML = "";
+    const angleStep = 360 / carouselImgs.length;
+
+    carouselImgs.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        container.appendChild(img);
+    });
+
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const container = document.getElementById("carouselContainer");
+    const imgs = container.querySelectorAll("img");
+    const angleStep = 360 / imgs.length;
+
+    imgs.forEach((img, i) => {
+        const angle = i * angleStep - currentIndex * angleStep;
+        const rad = angle * Math.PI / 180;
+        const scale = 0.7 + 0.3 * Math.cos(rad);
+        const z = radius * Math.cos(rad);
+        const x = radius * Math.sin(rad);
+        img.style.transform = `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(${scale}) rotateY(${angle}deg)`;
+        img.style.zIndex = Math.round(scale * 100);
+    });
+}
+
+function nextImage() { currentIndex = (currentIndex + 1) % carouselImgs.length; updateCarousel(); }
+function prevImage() { currentIndex = (currentIndex - 1 + carouselImgs.length) % carouselImgs.length; updateCarousel(); }
+</script>
 </body>
 </html>
