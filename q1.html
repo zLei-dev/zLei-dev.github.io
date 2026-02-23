@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ffe6f3, #ffd6ec);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Baloo 2', cursive;
+    overflow: hidden;
+}
+
+.open-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 45px;
+    border-radius: 60px;
+    background: linear-gradient(45deg, #ff9ed6, #ff6fb5);
+    box-shadow: 0 20px 50px rgba(255,105,180,0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+}
+
+.open-wrapper:active { transform: scale(0.95); }
+.open-text { color: white; font-size: 20px; font-weight: 600; }
+
+.flower-section {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+.flower-section.show { opacity: 1; transform: scale(1); }
+
+.flower {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.petal {
+    position: absolute;
+    width: 90px;
+    height: 130px;
+    background: radial-gradient(circle at top, #ffb6da, #ff6fb5);
+    border-radius: 50% 50% 45% 45%;
+    left: 50%;
+    top: 50%;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: rotate(0deg) translateY(0) scale(0);
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+.heart {
+    position: absolute;
+    color: #ff8fcf;
+    font-size: 18px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 0.8; }
+    to { transform: translateY(-350px); opacity: 0; }
+}
+
+/* Petals now fall from top */
+.falling-petal {
+    position: absolute;
+    width: 15px;
+    height: 20px;
+    background: #ff9ed6;
+    border-radius: 50%;
+    opacity: 0.8;
+    top: -50px; /* start above screen */
+    animation: fall linear forwards;
+}
+
+/* Flower center stays exactly in the middle */
+.center {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #fff4b0, #ffd65a);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(255, 217, 90, 0.6);
+    z-index: 10; /* on top of petals */
+}
+
+@keyframes fall {
+    from { transform: translateY(0) rotate(0deg); }
+    to { transform: translateY(100vh) rotate(360deg); }
+}
+
+.sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleAnim 2s ease-out forwards;
+}
+
+@keyframes sparkleAnim {
+    from { transform: scale(0); opacity: 1; }
+    to { transform: scale(2); opacity: 0; }
+}
+
+.swal2-popup { border-radius: 35px !important; padding: 2.5em !important; animation: softIn 0.8s ease; }
+@keyframes softIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.swal2-confirm { border-radius: 30px !important; padding: 14px 34px !important; font-size: 16px !important; transition: transform 0.2s ease !important; }
+.swal2-confirm:active { transform: scale(0.95) !important; }
+
+@media (max-width: 480px) {
+    .open-wrapper { padding: 18px 36px; }
+    .open-text { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="open-wrapper" id="startBtn">
+    <div class="open-text">Open your gift 🎀</div>
+</div>
+
+<div class="flower-section" id="flowerSection">
+    <div class="flower" id="flower"></div>
+    <div id="flowerSubtext" style="margin-top: 20px; font-size: 24px; color: #ff6fb5; font-family: 'Pacifico', cursive;">For you</div>
+</div>
+
+<script>
+const startBtn = document.getElementById("startBtn");
+startBtn.addEventListener("click", () => {
+    startBtn.style.display = "none";
+
+    Swal.fire({
+        title: 'You can do it baby 💗',
+        background: '#ffeaf4',
+        confirmButtonColor: '#ff6fb5',
+        confirmButtonText: 'Next'
+    }).then(() => {
+        Swal.fire({
+            title: "I'll always be here for you 💞",
+            background: '#ffeaf4',
+            confirmButtonColor: '#ff6fb5',
+            confirmButtonText: 'Show me',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then(() => {
+            Swal.close();
+            revealFlower();
+        });
+    });
+});
+
+function revealFlower() {
+    const flowerSection = document.getElementById("flowerSection");
+    flowerSection.classList.add("show");
+    createBloomPetals();
+    createHearts();
+    createFallingPetals();
+    createSparkles();
+}
+
+// petals bloom around the center with no gap
+function createBloomPetals() {
+    const flower = document.getElementById("flower");
+    const petalsCount = 10;
+    const radius = 60; // distance from center
+    for (let i = 0; i < petalsCount; i++) {
+        const petal = document.createElement("div");
+        petal.classList.add("petal");
+        const angle = i * (360 / petalsCount);
+        petal.style.transform = `rotate(${angle}deg) translateY(0) scale(0)`;
+        flower.appendChild(petal);
+
+        setTimeout(() => {
+            petal.style.opacity = "1";
+            petal.style.transform = `rotate(${angle}deg) translateY(-${radius}px) scale(1)`;
+
+            // petals fall after bloom
+            setTimeout(() => {
+                petal.style.transition = "transform 4s linear, opacity 4s linear";
+                petal.style.transform = `rotate(${angle}deg) translateY(300px) scale(0.7)`;
+                petal.style.opacity = "0";
+            }, 2000);
+        }, i * 150);
+    }
+}
+
+function createHearts() {
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        heart.style.animationDuration = (6 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+    }
+}
+
+function createFallingPetals() {
+    setInterval(() => {
+        const petal = document.createElement("div");
+        petal.classList.add("falling-petal");
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = (6 + Math.random() * 4) + "s";
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 10000);
+    }, 500);
+}
+
+function createSparkles() {
+    setInterval(() => {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 2000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
