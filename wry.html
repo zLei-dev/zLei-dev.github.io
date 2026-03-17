@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>do not go</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+  background: radial-gradient(circle at 50% 8%, #1a1a26, #050507 75%);
+  overflow: hidden;
+  color: #e8e8e8;
+}
+
+#particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.fog {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.025), transparent);
+  animation: fogMove 60s linear infinite;
+  z-index: 1;
+}
+
+@keyframes fogMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.cliff {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, #020203, #0c0c12);
+  clip-path: polygon(0% 100%, 100% 100%, 100% 48%, 72% 56%, 52% 50%, 28% 60%, 0% 55%);
+}
+
+.flower {
+  position: absolute;
+  bottom: 31%;
+  left: 58%;
+  transform-origin: bottom center;
+  animation: sway 7s ease-in-out infinite;
+  opacity: 0.9;
+  filter: blur(0.2px);
+}
+
+@keyframes sway {
+  0% { transform: rotate(-22deg); }
+  50% { transform: rotate(-30deg); }
+  100% { transform: rotate(-22deg); }
+}
+
+/* main text */
+.quote {
+  position: absolute;
+  top: 36%;
+  width: 100%;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  letter-spacing: 3px;
+  opacity: 0;
+  animation: fadeIn 6s ease forwards;
+  animation-delay: 3s;
+}
+
+/* subtext */
+.subtext {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  opacity: 0;
+  color: rgba(255,255,255,0.6);
+  animation: fadeIn 6s ease forwards;
+  animation-delay: 5.5s;
+}
+
+/* breathing effect */
+.quote span {
+  display: inline-block;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.subtext span {
+  display: inline-block;
+  animation: breatheSoft 6s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes breathe {
+  0% { opacity: 0.85; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.85; }
+}
+
+@keyframes breatheSoft {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.35; }
+  100% { opacity: 0.6; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+<div class="fog"></div>
+
+<div class="scene">
+
+  <div class="quote"><span>do not go.</span></div>
+  <div class="subtext"><span>choose me.</span></div>
+
+  <svg class="flower" width="130" height="210" viewBox="0 0 130 210">
+    <path d="M65 210 Q60 150 66 95" stroke="#2e4a3a" stroke-width="3" fill="none"/>
+    <ellipse cx="65" cy="80" rx="18" ry="9" fill="#4b4f68" transform="rotate(25 65 80)"/>
+    <ellipse cx="52" cy="92" rx="15" ry="7" fill="#3a3e55" transform="rotate(75 52 92)"/>
+    <ellipse cx="78" cy="92" rx="15" ry="7" fill="#3a3e55" transform="rotate(-75 78 92)"/>
+    <circle cx="65" cy="85" r="5" fill="#141418"/>
+  </svg>
+
+  <div class="cliff"></div>
+
+</div>
+
+<script>
+tsParticles.load("particles", {
+  particles: {
+    number: { value: 35 },
+    color: { value: "#ffffff" },
+    opacity: { value: 0.12 },
+    size: { value: 2 },
+    move: {
+      enable: true,
+      speed: 0.6,
+      direction: "right",
+      straight: false
+    }
+  },
+  background: { color: "transparent" }
+});
+</script>
+
+</body>
+</html>
