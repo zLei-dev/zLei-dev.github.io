@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>krishy mao</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Dancing Script', cursive;
+  background: radial-gradient(circle at center, #2c2c33 0%, #121118 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.state {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.paper-wrapper {
+  width: 90%;
+  max-width: 400px;
+  height: 80%;
+  position: relative;
+  perspective: 1200px;
+}
+
+.paper {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fdfaf1, #f5f2e6);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 0 15px rgba(0,0,0,0.05);
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+  transform-origin: left bottom;
+  backface-visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.5,0,0.2,1), box-shadow 0.8s, opacity 0.8s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.paper-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  color: #3b2f2f;
+  font-size: 1.2em;
+  line-height: 1.8;       /* more space between lines */
+  letter-spacing: 0.5px;  /* slight spacing between letters */
+  white-space: pre-wrap;
+  text-align: justify;    /* justify text */
+}
+.paper::-webkit-scrollbar, .paper-content::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+.paper { scrollbar-width: none; -ms-overflow-style: none; }
+
+.title {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Triangular folds */
+.fold {
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.fold-left {
+  left: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent #b3ad98 transparent transparent;
+}
+
+.fold-right {
+  right: 0;
+  border-style: solid;
+  border-width: 0 0 30px 30px;
+  border-color: transparent transparent transparent #b3ad98;
+}
+
+.fold-left:hover, .fold-right:hover {
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<!-- START STATE -->
+<div id="startState" class="state">
+  <div class="paper-wrapper">
+    <div class="paper">
+      <div class="paper-content">
+        <p class="title">For you</p>
+      </div>
+      <div id="startFold" class="fold fold-right"></div>
+    </div>
+  </div>
+</div>
+
+<!-- READING STATE -->
+<div id="readingState" class="state hidden">
+  <div class="paper-wrapper" id="paperStack"></div>
+</div>
+
+<audio id="pageAudio" loop></audio>
+
+<script>
+const startState = document.getElementById('startState');
+const readingState = document.getElementById('readingState');
+const startFold = document.getElementById('startFold');
+const paperStack = document.getElementById('paperStack');
+const pageAudio = document.getElementById('pageAudio');
+
+const pages = [
+  { text: "I:\n\nI understand you're hurt, and I take responsibility for my part. I've reflected and made changes. But I also feel like I feel like I haven't been able to fully share my thoughts in this situation. Maybe you're right, we need space, even though my heart and mind badly want to reject that idea. Problems are meant to be solved together after all. You already said your comments, your long-time frustration, your unresolved resentment, and broken trust. I understand, and I'm sorry for not handling them well and for the pain I caused. Right now, I'm also hurt. Being just friends is hard for me right now, but hmm..I . It just hurts too much. hm this message goes beyond what I'd usually say. I don't want any of this, but if space helps you, then I'll step back for now. I know you won't come back to me once I leave. You'd probably be happy or liberated no? The countless comments and messages over the months have landed marks on me. I've carried them, I've replayed them, I've felt every word echo in my mind, and it's painful. I know you're probably laughing at this message, thinking how bs it is, and yes, I know. You're always right, you always win, but even knowing that doesn't make this any easier for me to make this.", music: "aud/fir.mp3", volume: 0.325 },
+  { text: "won't:\n\nI'm still fighting for what I love and what I believe is worth it. It hurts. It hurts making this, feeling guilty, this isn't me. I love you, and this is just painful. I want you to know that even as I step back a little, even as I give you the space you've been pleading for, my heart still yearns for you. hm I'll wait in silence, I'll respect your boundaries, I'll give you the room you need, because I love you and I care for you even if you don't think so. Even now, thinking of all the things we shared, the moments that felt ours, the laughter, the closeness, it all floods my mind. I wish I could rewind and fix everything, I wish I could make you see me, without the hurt clouding it yk. hm.. I remember the small things, the way you smiled when you felt safe with me before, the late-night talks that made the world feel smaller wishing time went slower, the quiet moments where no words were said. just presence of us just doing normal stuff. Those memories keep me holding on honestly this part of the message stabs my most vulnerable side having to remember that, in this kind of moment, I know I can't force understanding, I can't force love in return. I only have this moment, this message, my honesty. and the hope that somehow you'll feel it, even a little. \"Us Against the Chaos\", do you still remember it? hm. it's okay if you don't...I think of the nights I'm still up, the tears let out, the times I wanted to badly reach out for you but stopped myself, because I knew space was what you needed because I do everything wrongly, you feel more at peace without me in the picture. I feel the ache of wanting to be there for you, wanting to fix what's broken, wanting to tell you everything I feel without words failing me. every time my mouth opens. But I also know that love isn't possession as you've mentioned before, love isn't control, love is still letting go when it's right, even if my heart admittedly refuses to. Even in letting go, I'm still here, quietly, holding the part of us that's mine to keep. I've always been scared of losing you, having the thought of you disappearing if I blink, how I still remember your scent and touch. The part of our moments where we forgot everything else, just you and me in the moment. Do you still remember our first interactions with each other? from wtv boost your ego to RAHHHHHHHHH chaoticness ;p lol. I miss you. I really do. I guess I can say you and me are in a \"pickle\", get it? cuz erm you love pickles ehehheh.., I'm just scared, I'm always scared, the thought of you with someone else, is this a cool phrase/quote? \"I'd rather end myself, baste in the world of our sweetest memories than wake up to a life where you're gone.\" ehhh?? how about it? <3, bobo ko talaga ahhahah. I wonder how you're feeling right now, do you think this letter is dumb? stupid? I reckon you do, issokie. I hope you're feeling okay and well fed :p, remember that twat. my twat. hm I'm getting off tracked. my apologies.", music: "aud/meed.mp3", volume: 0.3 },
+  { text: "leave:\n\nIf you still want me, reach out. If not, as my last sign of respect and love, I'll stay quiet and give you what you've always wanted. I won't contact, I won't chase, I won't pressure. I'll step back fully for now, but I'm still here. I still hope for us, even if you do not. I still love you, and these are my words, my heart and self laid raw. My last words to you like this. I'll carry my love patiently. I'll carry it quietly, in the spaces between us, in the silence that follows, in the memory of what we were and what I still hold for you. I love you. I always have. I always will. For your sake, I'll give you space now. I'm still here, I still love you.", music: "aud/mid.mp3", volume: 0.4 },
+  { text: "\“I love you, Palpi.\” \n-andie.", music: "aud/last.mp3", volume: 0.55 }
+];
+
+let currentIndex = 0;
+
+function createPages() {
+  paperStack.innerHTML = '';
+  for (let i = pages.length - 1; i >= 0; i--) {
+    const page = document.createElement('div');
+    page.className = 'paper';
+
+    const content = document.createElement('div');
+    content.className = 'paper-content';
+    content.textContent = pages[i].text;
+    page.appendChild(content);
+
+    page.style.zIndex = pages.length - i;
+    paperStack.appendChild(page);
+  }
+  updateFolds();
+  playMusic(currentIndex);
+}
+
+function playMusic(index) {
+  pageAudio.src = pages[index].music;
+  pageAudio.volume = pages[index].volume;
+  pageAudio.play();
+}
+
+function updateFolds() {
+  removeFolds();
+  const papers = paperStack.querySelectorAll('.paper');
+  const topPage = papers[papers.length - 1 - currentIndex];
+
+  if (currentIndex > 0) {
+    const foldLeft = document.createElement('div');
+    foldLeft.className = 'fold fold-left';
+    foldLeft.addEventListener('click', () => turnPage('prev'));
+    topPage.appendChild(foldLeft);
+  }
+
+  if (currentIndex < pages.length - 1) {
+    const foldRight = document.createElement('div');
+    foldRight.className = 'fold fold-right';
+    foldRight.addEventListener('click', () => turnPage('next'));
+    topPage.appendChild(foldRight);
+  }
+}
+
+function removeFolds() {
+  paperStack.querySelectorAll('.fold').forEach(f => f.remove());
+}
+
+function turnPage(direction) {
+  const papers = paperStack.querySelectorAll('.paper');
+
+  if (direction === 'next' && currentIndex < pages.length - 1) {
+    const top = papers[papers.length - 1 - currentIndex];
+    top.style.transform = "rotateY(-160deg) rotateX(5deg)";
+    top.style.boxShadow = "inset 0 0 80px rgba(0,0,0,0.2)";
+    top.style.opacity = 0;
+    currentIndex++;
+    playMusic(currentIndex);
+    setTimeout(updateFolds, 800);
+  } else if (direction === 'prev' && currentIndex > 0) {
+    currentIndex--;
+    const top = papers[papers.length - 1 - currentIndex];
+    top.style.transform = "rotateY(0deg) rotateX(0deg)";
+    top.style.boxShadow = "0 8px 20px rgba(0,0,0,0.4), inset 0 0 15px rgba(0,0,0,0.05)";
+    top.style.opacity = 1;
+    playMusic(currentIndex);
+    setTimeout(updateFolds, 300);
+  }
+}
+
+startFold.addEventListener('click', () => {
+  startState.classList.add('hidden');
+  readingState.classList.remove('hidden');
+  createPages();
+});
+</script>
+
+</body>
+</html>
