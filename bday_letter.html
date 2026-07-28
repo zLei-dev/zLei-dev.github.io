@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>for you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; background:var(--bg); overflow:hidden; font-family:'Cormorant Garamond', serif; }
+
+  /* ===== STAGE 1 : DARK SPOTLIGHT SCENE ===== */
+
+  #stage{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(circle at 50% 46%, rgba(255,226,176,0.16) 0%, rgba(255,226,176,0.06) 18%, rgba(10,10,12,0) 40%),
+      var(--bg);
+  }
+
+  .dust{ position:absolute; inset:0; pointer-events:none; opacity:.5; }
+  .dust span{
+    position:absolute; width:2px; height:2px;
+    background: rgba(255,226,176,0.6); border-radius:50%;
+    left:50%; top:50%;
+    animation: drift 9s linear infinite;
+    opacity:0;
+  }
+  @keyframes drift{
+    0%{ transform:translate(0,0); opacity:0; }
+    10%{ opacity:.7; } 90%{ opacity:.4; }
+    100%{ transform:translate(var(--dx), var(--dy)); opacity:0; }
+  }
+
+  .vignette{ position:absolute; inset:0; box-shadow: inset 0 0 18vw 4vw rgba(0,0,0,0.85); pointer-events:none; }
+
+  #flash{
+    position:fixed; inset:0;
+    z-index:80;
+    background:
+      radial-gradient(circle at 50% 50%, #fff9ef 0%, #ffe3bd 22%, #ffcfe0 46%, rgba(255,207,224,0) 72%);
+    opacity:0;
+    pointer-events:none;
+  }
+
+  /* ===== CRUMPLED PAPER BALL ===== */
+
+  #paper-wrap{
+    position:relative;
+    width:min(62vw, 300px);
+    aspect-ratio: 1/1;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .4s cubic-bezier(.3,0,.2,1);
+  }
+  #paper-wrap.opening{
+    transform: scale(1.14);
+  }
+
+  .paper-svg{
+    width:100%; height:100%;
+    display:block;
+    overflow:visible;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.55));
+  }
+
+  #click-label{
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%) rotate(-4deg);
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: clamp(22px, 3.6vw, 30px);
+    color: #3a2f26;
+    opacity:0;
+    letter-spacing:.5px;
+    pointer-events:none;
+    transition: opacity 1.4s ease;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+  }
+
+  /* ===== STAGE 2 : PINK FLORAL BIRTHDAY SCENE ===== */
+
+  #letter-scene{
+    position:fixed; inset:0;
+    display:flex; align-items:flex-start; justify-content:center;
+    padding: 6vh 20px 8vh;
+    overflow-y:auto;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(255,255,255,0.7), rgba(255,255,255,0) 45%),
+      linear-gradient(180deg, #ffe9f0 0%, #ffd7e4 45%, #ffc9dc 100%);
+    opacity:0;
+    pointer-events:none;
+  }
+  #letter-scene.show{ opacity:1; pointer-events:auto; }
+
+  .petals{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+  .petal{
+    position:absolute; top:-5%;
+    width:14px; height:10px;
+    background: radial-gradient(circle at 30% 30%, #ffb6cf, #f486ab);
+    border-radius: 60% 40% 60% 40%;
+    opacity:.85;
+    animation: fall linear infinite;
+  }
+  @keyframes fall{
+    0%{ transform: translateY(0) translateX(0) rotate(0deg); }
+    100%{ transform: translateY(110vh) translateX(var(--sway)) rotate(340deg); }
+  }
+
+  #letter{
+    position:relative;
+    z-index:1;
+    width:min(560px, 90vw);
+    background:
+      radial-gradient(circle at 15% 8%, rgba(255,255,255,0.65), rgba(255,255,255,0) 35%),
+      #fff7f9;
+    color:#6b2f45;
+    padding: clamp(34px,6vw,64px) clamp(28px,6vw,58px) clamp(44px,6vw,64px);
+    box-shadow: 0 30px 70px rgba(200,90,130,0.35), inset 0 0 50px rgba(255,182,207,0.25);
+    border-radius: 8px;
+    transform: scale(.9) translateY(22px) rotate(-1.2deg);
+    opacity:0;
+    transition: transform 1.3s cubic-bezier(.16,1,.3,1), opacity 1.1s ease;
+  }
+  #letter-scene.show #letter{ transform: scale(1) translateY(0) rotate(0deg); opacity:1; transition-delay: .15s; }
+
+  #letter::before{
+    content:"";
+    position:absolute; inset:9px;
+    border:1px dashed rgba(214,120,155,0.35);
+    border-radius:4px;
+    pointer-events:none;
+  }
+
+  .corner-flower{ position:absolute; width:56px; height:56px; opacity:.9; }
+  .corner-flower.tl{ top:8px; left:8px; }
+  .corner-flower.br{ bottom:8px; right:8px; transform:rotate(180deg); }
+
+  .letter-heading{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: clamp(32px, 5.4vw, 46px);
+    color:#e0568a;
+    margin-bottom: 4px;
+  }
+  .letter-sub{
+    font-style:italic; font-size:15px; color:#c98aa4;
+    margin-bottom: 26px; letter-spacing:.04em;
+  }
+  .letter-body p{
+    font-size: clamp(17px, 2.1vw, 19px);
+    line-height:1.85;
+    margin-bottom: 18px;
+  }
+  .letter-signoff{
+    margin-top: 28px;
+    font-family:'Caveat', cursive;
+    font-weight:600;
+    font-size: 26px;
+    color:#6b2f45;
+  }
+  .letter-signoff span{
+    display:block; font-size:30px; color:#e0568a; margin-top:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div class="dust" id="dust"></div>
+  <div class="vignette"></div>
+  <div id="flash"></div>
+
+  <div id="paper-wrap" role="button" aria-label="Open your letter" tabindex="0">
+    <svg class="paper-svg" id="paperSvg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="crumpleFilter" x="-40%" y="-40%" width="180%" height="180%">
+          <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="7" result="noise"/>
+          <feDisplacementMap id="disp" in="SourceGraphic" in2="noise" scale="55" xChannelSelector="R" yChannelSelector="G" result="warped"/>
+          <feGaussianBlur id="shadowBlur" in="warped" stdDeviation="0" result="blurred"/>
+          <feColorMatrix in="blurred" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0" result="shadowShape"/>
+          <feOffset in="shadowShape" dx="4" dy="6" result="shadowOffset"/>
+          <feMerge>
+            <feMergeNode in="shadowOffset"/>
+            <feMergeNode in="warped"/>
+          </feMerge>
+        </filter>
+        <linearGradient id="paperShade" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f6efd9"/>
+          <stop offset="55%" stop-color="#e6d9b8"/>
+          <stop offset="100%" stop-color="#cdbd94"/>
+        </linearGradient>
+      </defs>
+      <g id="paperGroup" filter="url(#crumpleFilter)" transform="rotate(0 150 150)">
+        <rect id="paperRect" x="118" y="118" width="64" height="64" rx="30" fill="url(#paperShade)"/>
+      </g>
+    </svg>
+    <div id="click-label">tap me ;p</div>
+  </div>
+</div>
+
+<div id="letter-scene">
+  <div class="petals" id="petals"></div>
+  <div id="letter">
+    <svg class="corner-flower tl" viewBox="0 0 60 60"><use href="#flower"/></svg>
+    <svg class="corner-flower br" viewBox="0 0 60 60"><use href="#flower"/></svg>
+
+    <div class="letter-heading">happy birthday, my love</div>
+    <div class="letter-sub">may turon ka sakin bebs guranteed</div>
+    <div class="letter-body">
+      <p>Ello, love ko. Surpriseee. It's been a while since I made anything digital for you. I wanted to make something that would stay with you, something you could come back to whenever you needed a little reminder. Words are supposed to express what someone wants to give to another person. But in my case, I don't think they'll ever be enough to explain how much you mean to me or how much I love you.</p>
+      <p>It's been a whole year now. Honestly, that's crazy. We've gone through so many ups and downs, round and round,cried together, annoyed each other, made up, and somehow we still found our way back to one another. I think that's crazy. I'm crazy for you, luckily. I love you so much, baobao. Out of everyone in this world, I'm so happy you exist. Thankyu for poofing into my life and me pooofing into yours magically</p>
+      <p>I know there are days when everything feels tiring. Days when your thoughts get loud, when you're tired, or when you feel like you're too much. I hope you remember this whenever those days come. I'm sorry for the times you've felt unloved, unhappy, or miserable in our relationship. I know there were moments when my love didn't reach you in the way you needed it to, even though I never wanted you to feel that way. I can't erase those moments, but I hope you know I've never stopped trying to love you the best way I know how. You are never too much for me. You never have to pretend you're okay just to protect me. You never have to earn my love. I love you on your happiest days. I love you on your quiet days. I love you on the days you don't even know how to love yourself. You don't have to carry everything alone anymore. If the world feels overwhelming, lean on me for a while. We'll sit together until things feel lighter. I'll remind you to rest when you forget. I'll remind you how loved you are when your mind tells you otherwise. Even if I don't always know the right words, I'll still stay.</p>
+      <p>I know I'm not the bestest, and I know I make mistakes. I'm still learning. But every single day I wake up wanting to love you better than I did yesterday. I want to become someone you feel safe with, someone you smile when you think about, someone who makes life feel a little less scary. I'll keep trying because you're worth every bit of that effort.</p>
+      <p>Happy birthday, my love. I hope this year is gentle with you. I hope you find more peace, more reasons to laugh until your tum tum hurts, more little moments that make life feel worth living. I hope your dreams slowly become reality, and I hope whenever things get difficult, you remember there's someone out there who believes in you with his whole heart and turon.</p>
+      <p>Thank you for being my favorite person. Thank you for every memory we've made and every memory we haven't made yet. Here's to another year of us. Another year of growing, healing, laughing, being silly, and loving each other. I'll keep choosing you today, tomorrow, and every day after that.</p>
+      <p>I love you endlessly, baobao. Happy birthday. ❤️</p>
+    </div>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="flower">
+      <g fill="#f2a5c2">
+        <ellipse cx="30" cy="16" rx="9" ry="13"/>
+        <ellipse cx="30" cy="44" rx="9" ry="13"/>
+        <ellipse cx="16" cy="30" rx="13" ry="9"/>
+        <ellipse cx="44" cy="30" rx="13" ry="9"/>
+      </g>
+      <circle cx="30" cy="30" r="7" fill="#ffe27a"/>
+      <path d="M8 52 Q20 44 30 52" stroke="#8fbf8a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </g>
+  </defs>
+</svg>
+
+<script>
+  // scatter ambient dust in stage 1
+  const dust = document.getElementById('dust');
+  for(let i=0;i<28;i++){
+    const s = document.createElement('span');
+    const angle = Math.random()*Math.PI*2;
+    const dist = 80 + Math.random()*260;
+    s.style.setProperty('--dx', (Math.cos(angle)*dist)+'px');
+    s.style.setProperty('--dy', (Math.sin(angle)*dist - 40)+'px');
+    s.style.animationDelay = (Math.random()*9)+'s';
+    s.style.animationDuration = (7+Math.random()*6)+'s';
+    dust.appendChild(s);
+  }
+
+  // ---- crumpled ball -> flat sheet ----
+  const disp = document.getElementById('disp');
+  const turb = document.getElementById('turb');
+  const rect = document.getElementById('paperRect');
+  const group = document.getElementById('paperGroup');
+  const blur = document.getElementById('shadowBlur');
+  const label = document.getElementById('click-label');
+
+  // ball state
+  const from = { x:118, y:118, w:64, h:64, r:30, scale:55, freq:0.09, blurAmt:2.5, rot:-14 };
+  // flat sheet state
+  const to   = { x:14,  y:14,  w:272,h:272,r:4,  scale:0,  freq:0.012, blurAmt:0, rot:0 };
+
+  function easeInOutCubic(t){
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  }
+
+  const startDelay = 700;
+  const duration = 6200; // slower, smoother
+  let startTime = null;
+
+  function lerp(a,b,t){ return a + (b-a)*t; }
+
+  function frame(now){
+    if(startTime === null) startTime = now + startDelay;
+    const raw = Math.min(1, Math.max(0, (now - startTime) / duration));
+    const t = easeInOutCubic(raw);
+
+    // gentle settling wobble that decays as t -> 1
+    const wobble = Math.sin(raw * 18) * (1 - raw) * 6;
+
+    rect.setAttribute('x', lerp(from.x, to.x, t).toFixed(1));
+    rect.setAttribute('y', lerp(from.y, to.y, t).toFixed(1));
+    rect.setAttribute('width', lerp(from.w, to.w, t).toFixed(1));
+    rect.setAttribute('height', lerp(from.h, to.h, t).toFixed(1));
+    rect.setAttribute('rx', lerp(from.r, to.r, t).toFixed(1));
+
+    disp.setAttribute('scale', lerp(from.scale, to.scale, t).toFixed(2));
+    turb.setAttribute('baseFrequency', lerp(from.freq, to.freq, t).toFixed(4));
+    blur.setAttribute('stdDeviation', lerp(from.blurAmt, to.blurAmt, t).toFixed(2));
+
+    group.setAttribute('transform', `rotate(${(lerp(from.rot, to.rot, t) + wobble).toFixed(2)} 150 150)`);
+
+    if(raw < 1){
+      requestAnimationFrame(frame);
+    } else {
+      label.style.opacity = 1;
+    }
+  }
+  requestAnimationFrame(frame);
+
+  // petals for stage 2
+  const petalsWrap = document.getElementById('petals');
+  const petalCount = window.innerWidth < 600 ? 14 : 24;
+  for(let i=0;i<petalCount;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = (Math.random()*100) + 'vw';
+    p.style.setProperty('--sway', (Math.random()*140-70)+'px');
+    p.style.animationDuration = (9 + Math.random()*8) + 's';
+    p.style.animationDelay = (Math.random()*10) + 's';
+    p.style.transform = `scale(${0.7 + Math.random()*0.8})`;
+    petalsWrap.appendChild(p);
+  }
+
+  // click / reveal
+  const paperWrap = document.getElementById('paper-wrap');
+  const stage = document.getElementById('stage');
+  const letterScene = document.getElementById('letter-scene');
+  const flash = document.getElementById('flash');
+  let revealed = false;
+
+  function reveal(){
+    if(revealed) return;
+    revealed = true;
+
+    // 1. paper pulses open
+    paperWrap.classList.add('opening');
+
+    // 2. warm light blooms outward, covering the cut
+    setTimeout(()=>{
+      flash.animate(
+        [{ opacity:0, transform:'scale(0.6)' }, { opacity:1, transform:'scale(1)' }],
+        { duration:650, easing:'cubic-bezier(.2,.8,.2,1)', fill:'forwards' }
+      );
+    }, 220);
+
+    // 3. swap scenes while fully covered by the bloom
+    setTimeout(()=>{
+      stage.style.display = 'none';
+      letterScene.classList.add('show');
+    }, 780);
+
+    // 4. bloom gently dissolves to reveal the pink scene underneath
+    setTimeout(()=>{
+      flash.animate(
+        [{ opacity:1 }, { opacity:0 }],
+        { duration:1400, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards' }
+      );
+    }, 820);
+  }
+
+  paperWrap.addEventListener('click', reveal);
+  paperWrap.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); reveal(); }
+  });
+</script>
+
+</body>
+</html>
