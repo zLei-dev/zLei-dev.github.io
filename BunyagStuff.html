@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js')</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Invited: Sayzha Kate's Baptism &amp; First Birthday</title>
+<meta name="description" content="Join us for Sayzha Kate's baptism and first birthday on January 18, 2027 at St. William's Cathedral, Laoag City.">
+<meta name="theme-color" content="#fbe4e9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%23e89bb0'%3E%3Ccircle cx='16' cy='9' r='5.5'/%3E%3Ccircle cx='22.7' cy='13.9' r='5.5'/%3E%3Ccircle cx='20.1' cy='21.8' r='5.5'/%3E%3Ccircle cx='11.9' cy='21.8' r='5.5'/%3E%3Ccircle cx='9.3' cy='13.9' r='5.5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='3.6' fill='%23d9a86c'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You're Invited: Sayzha Kate's Baptism &amp; First Birthday">
+<meta property="og:description" content="January 18, 2027 &middot; St. William's Cathedral, Laoag City. Tap to see the details and RSVP.">
+<meta property="og:image" content="cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush: #fbe4e9;
+    --blush-deep: #f4c6d3;
+    --pink: #e89bb0;
+    --pink-deep: #d97a94;
+    --lavender: #efe3f3;
+    --cream: #fffaf6;
+    --gold: #a8742f;
+    /* palette: pink + lavender + cream + gold, with soft tints for panel backgrounds */
+    --blush-soft: #fdf1f4;
+    --lav-soft: #f7f0fa;
+    --fs-xs: 0.78rem;
+    --fs-sm: 0.9rem;
+    --fs-md: 1rem;
+    --space-section: 56px;
+    --text: #6b4a55;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+    body{
+    font-family:'Quicksand', sans-serif;
+    color:var(--text);
+    background:var(--cream);
+    overflow-x:hidden;
+  }
+  .script{ font-family:'Caveat', cursive; }
+
+  /* ---------- floating decor ---------- */
+  @keyframes floaty{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-18px) rotate(4deg); }
+  }
+  @keyframes driftLeft{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-30px); }
+  }
+
+  /* ================= OPENING ================= */
+  .opening{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background: #fdeff3;
+    padding: 40px 20px;
+    overflow:hidden;
+  }
+
+  .clouds{ position:absolute; inset:0; pointer-events:none; }
+  .cloud{
+    position:absolute;
+    background:#fff;
+    border-radius:100px;
+    opacity:0.6;
+    filter:blur(1px);
+  }
+  .cloud:before, .cloud:after{
+    content:'';
+    position:absolute;
+    background:#fff;
+    border-radius:100px;
+  }
+  .c1{ width:120px; height:40px; top:8%; left:6%; animation:driftLeft 18s ease-in-out infinite alternate;}
+  .c1:before{ width:60px; height:60px; top:-25px; left:15px; }
+  .c1:after{ width:50px; height:50px; top:-18px; left:60px; }
+  .c2{ width:90px; height:32px; top:14%; right:8%; animation:driftLeft 14s ease-in-out infinite alternate-reverse;}
+  .c2:before{ width:45px; height:45px; top:-18px; left:10px; }
+  .c2:after{ width:38px; height:38px; top:-14px; left:45px; }
+  .c3{ width:100px; height:34px; bottom:10%; left:10%; animation:driftLeft 20s ease-in-out infinite alternate; opacity:0.45;}
+  .c3:before{ width:50px; height:50px; top:-20px; left:12px; }
+  .c3:after{ width:40px; height:40px; top:-14px; left:52px; }
+
+  .balloon{ width:34px; height:42px; border-radius:50% 50% 50% 50%/58% 58% 42% 42%; position:absolute; animation:floaty 6s ease-in-out infinite; }
+  .balloon:after{ content:''; position:absolute; left:50%; bottom:-22px; width:1px; height:24px; background:rgba(107,74,85,0.35); transform:translateX(-50%); }
+  .b1{ background:var(--pink); top:18%; left:12%; animation-delay:0s; }
+  .b2{ background:var(--lavender); top:10%; right:14%; animation-delay:1.2s; }
+  .b3{ background:var(--gold); opacity:0.7; top:30%; right:6%; width:24px; height:30px; animation-delay:0.6s; }
+  .b4{ background:var(--blush-deep); top:65%; left:6%; width:26px; height:32px; animation-delay:2s; }
+
+  /* flowers made with layered petals (css only, no external assets needed) */
+  .flower{ position:absolute; animation: floaty 8s ease-in-out infinite; }
+  .flower .petal{
+    position:absolute;
+    width:16px; height:22px;
+    background: var(--pink);
+    border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+    top:0; left:0;
+    transform-origin: 50% 100%;
+  }
+  .flower .center{
+    position:absolute;
+    width:10px; height:10px;
+    background: var(--gold);
+    border-radius:50%;
+    top:6px; left:3px;
+    z-index:2;
+  }
+  .flower.small .petal{ width:10px; height:14px; }
+  .flower.small .center{ width:6px; height:6px; top:4px; left:2px; }
+  .flower.lav .petal{ background: #cfa8d8; }
+  .flower.blush .petal{ background: var(--blush-deep); }
+
+  .f1{ top:6%; left:22%; }
+  .f2{ top:70%; left:16%; animation-delay:1s;}
+  .f3{ top:22%; right:20%; animation-delay:2s;}
+  .f4{ top:78%; right:14%; animation-delay:0.5s;}
+  .f5{ top:48%; left:4%; animation-delay:1.6s;}
+  .f6{ top:40%; right:5%; animation-delay:0.8s;}
+
+  .opening-content{ position:relative; z-index:2; max-width:640px; }
+  .eyebrow{
+    font-size: 0.95rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 18px;
+    font-weight:600;
+  }
+  .invited{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: clamp(3.2rem, 12vw, 6.5rem);
+    color: var(--pink-deep);
+    line-height:1;
+  }
+  .baby-name{
+    margin-top: 22px;
+    font-family:'Caveat', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--text);
+    font-weight:600;
+  }
+  .baby-name span{
+    display:block;
+    font-family:'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .subline{
+    margin-top: 20px;
+    font-size: 1.05rem;
+    color: var(--text);
+    opacity:0.85;
+  }
+
+  .scroll-cue{
+    margin: 46px auto 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color: var(--pink-deep);
+    font-weight:600;
+    letter-spacing:0.15em;
+    font-size: 0.78rem;
+    text-transform:uppercase;
+    background:none;
+    border:none;
+    appearance:none;
+    -webkit-appearance:none;
+    font-family:'Quicksand', sans-serif;
+    cursor:pointer;
+    padding: 10px;
+    border-radius: 12px;
+    transition: opacity 0.2s;
+    width: fit-content;
+    text-align:center;
+  }
+  .scroll-cue:hover{ opacity:0.7; }
+  .scroll-cue:focus-visible{ outline: 2px solid var(--pink-deep); outline-offset: 3px; }
+  .scroll-cue .arrow{
+    width:12px; height:12px;
+    border-right:2px solid var(--pink-deep);
+    border-bottom:2px solid var(--pink-deep);
+    transform: rotate(45deg);
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes bounce{
+    0%,100%{ transform: rotate(45deg) translate(0,0); }
+    50%{ transform: rotate(45deg) translate(6px,6px); }
+  }
+
+  /* ================= CONTENT ================= */
+  .content{
+    position:relative;
+    background: linear-gradient(180deg, #fdf3f6 0%, #fff 100%);
+    padding: 90px 20px 100px;
+    text-align:center;
+  }
+  .content:before{
+    content:'';
+    position:absolute;
+    top:-1px; left:0; right:0;
+    height:60px;
+    background: var(--cream);
+    border-radius: 0 0 50% 50%/0 0 100% 100%;
+  }
+
+  .section-title{
+    font-family:'Caveat', cursive;
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    color: var(--pink-deep);
+    margin-bottom: 6px;
+  }
+  .section-sub{
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight:700;
+    margin-bottom: 40px;
+  }
+
+  .card{
+    max-width: 560px;
+    margin: 0 auto 50px;
+    background: #fff;
+    border: 1px solid var(--blush-deep);
+    border-radius: 24px;
+    padding: 36px 30px;
+    box-shadow: 0 18px 40px -20px rgba(217, 122, 148, 0.35);
+    position:relative;
+  }
+  .card:before{
+    content:''; background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e89bb0' stroke-width='1.6' stroke-linejoin='round'><path d='M12 3l1.8 7.2L21 12l-7.2 1.8L12 21l-1.8-7.2L3 12l7.2-1.8z'/></svg>") center/16px no-repeat;
+    position:absolute;
+    top:-18px; left:50%;
+    transform:translateX(-50%);
+    font-size:1.6rem;
+    color: var(--pink);
+    width:36px; height:36px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 6px 14px -6px rgba(217,122,148,0.4);
+  }
+
+  .desc-text{
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .desc-text .lead{
+    font-family:'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--pink-deep);
+    display:block;
+    margin-bottom: 10px;
+  }
+
+  .details-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align:left;
+  }
+  .detail-row{
+    display:flex;
+    align-items:flex-start;
+    gap: 16px;
+  }
+  .detail-icon{
+    flex-shrink:0;
+    width: 46px; height:46px;
+    border-radius:50%;
+    background: var(--blush);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.3rem;
+  }
+  .detail-label{
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform:uppercase;
+    color: var(--gold);
+    font-weight:700;
+    margin-bottom: 3px;
+  }
+  .detail-value{
+    font-size: 1.05rem;
+    font-weight:600;
+    color: var(--text);
+  }
+  .detail-value small{
+    display:block;
+    font-weight:500;
+    font-size:0.85rem;
+    opacity:0.75;
+    margin-top:2px;
+  }
+
+  .divider{
+    width: 60px; height:2px;
+    background: var(--blush-deep);
+    margin: 30px auto;
+    border-radius: 2px;
+  }
+
+  .footer-note{
+    margin-top: 50px;
+    font-family:'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--pink-deep);
+  }
+  .footer-sub{
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity:0.7;
+  }
+
+  @media (min-width: 620px){
+    .details-grid{ grid-template-columns: 1fr; }
+  }
+
+  .detail-row{ justify-content:space-between; }
+  .detail-row .detail-text{ flex:1; }
+
+  /* ---------- reminders ---------- */
+  .accent-card{
+    max-width: 560px;
+    margin: 0 auto 50px;
+    border-radius: 24px;
+    padding: 32px 28px;
+    text-align:left;
+    position:relative;
+  }
+  .accent-card.pink{ background: var(--blush); }
+  .reminders-title{
+    font-family:'Caveat', cursive;
+    font-size: 1.8rem;
+    color: var(--pink-deep);
+    margin-bottom: 18px;
+    text-align:center;
+  }
+  .reminder-item{
+    display:flex;
+    align-items:flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.98rem;
+    line-height:1.5;
+  }
+  .reminder-item:last-child{ margin-bottom:0; }
+  .reminder-dot{
+    flex-shrink:0;
+    width: 26px; height:26px;
+    border-radius:50%;
+    background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.9rem;
+    box-shadow: 0 4px 10px -4px rgba(217,122,148,0.4);
+  }
+
+
+  /* ---------- RSVP form ---------- */
+  .rsvp-card{
+    max-width: 460px;
+    margin: 0 auto 20px;
+    background:#fff;
+    border: 1px solid var(--blush-deep);
+    border-radius: 24px;
+    padding: 36px 30px;
+    box-shadow: 0 18px 40px -20px rgba(217, 122, 148, 0.35);
+    text-align:left;
+  }
+  .rsvp-title{
+    font-family:'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--pink-deep);
+    text-align:center;
+    margin-bottom: 4px;
+  }
+  .rsvp-sub{
+    text-align:center;
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity:0.7;
+    margin-bottom: 26px;
+  }
+  .field{ margin-bottom: 20px; }
+  .field label{
+    display:block;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight:700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="number"]{
+    width:100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1.5px solid var(--blush-deep);
+    background: #fff8fa;
+    font-family:'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: var(--text);
+    outline:none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus{ border-color: var(--pink-deep); }
+  .field-hint{ margin-top:6px; font-size:0.8rem; opacity:0.7; }
+  .toggle-group{
+    display:flex;
+    gap: 10px;
+  }
+  .toggle-btn{
+    flex:1;
+    padding: 12px 0;
+    border-radius: 14px;
+    border: 1.5px solid var(--blush-deep);
+    background:#fff8fa;
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size: 0.95rem;
+    color: var(--text);
+    cursor:pointer;
+    transition: all 0.2s;
+  }
+  .toggle-btn.active{
+    background: var(--pink);
+    border-color: var(--pink);
+    color:#fff;
+  }
+  .rsvp-submit{
+    width:100%;
+    padding: 14px 0;
+    border:none;
+    border-radius: 999px;
+    background: var(--pink-deep);
+    color:#fff;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size: 1rem;
+    letter-spacing:0.05em;
+    cursor:pointer;
+    box-shadow: 0 10px 20px -8px rgba(217,122,148,0.6);
+    transition: transform 0.15s, opacity 0.2s;
+  }
+  .rsvp-submit:hover{ transform: translateY(-2px); }
+  .rsvp-submit:disabled{ opacity:0.6; cursor:not-allowed; transform:none; }
+  .rsvp-status{
+    margin-top: 14px;
+    text-align:center;
+    font-size: 0.9rem;
+    font-weight:600;
+    min-height: 20px;
+  }
+  .rsvp-status.ok{ color: #4a9d6e; }
+  .rsvp-status.err{ color: #c9536c; }
+  .guests-hidden{ display:none; }
+
+  .stepper{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border: 1.5px solid var(--blush-deep);
+    background: #fff8fa;
+    border-radius: 14px;
+    padding: 6px;
+  }
+  .stepper-btn{
+    width: 38px; height:38px;
+    border-radius: 10px;
+    border:none;
+    background: var(--blush);
+    color: var(--pink-deep);
+    font-size: 1.2rem;
+    font-weight:700;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    line-height:1;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .stepper-btn:hover{ background: var(--pink); color:#fff; }
+  .stepper-btn:active{ transform: scale(0.92); }
+  .stepper-btn:disabled{ opacity:0.4; cursor:not-allowed; background:var(--blush); color:var(--pink-deep); transform:none; }
+  .stepper-value{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size: 1.1rem;
+    color: var(--text);
+    min-width: 32px;
+    text-align:center;
+  }
+
+  /* ---------- falling petals (entrance animation) ---------- */
+  .petal-fall{
+    position:fixed;
+    top:-40px;
+    z-index: 999;
+    pointer-events:none;
+    opacity:0.9;
+    animation: petalFall linear forwards;
+  }
+  .petal-fall svg{ width:100%; height:100%; display:block; }
+  @keyframes petalFall{
+    0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:0.95; }
+    100%{ transform: translateY(105vh) translateX(var(--drift, 40px)) rotate(360deg); opacity:0.2; }
+  }
+
+  /* ---------- scripture / blessing quote ---------- */
+  .verse-card{
+    max-width: 560px;
+    margin: 0 auto 50px;
+    text-align:center;
+    padding: 10px 20px;
+  }
+  .verse-text{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    color: var(--pink-deep);
+    line-height:1.4;
+  }
+  .verse-ref{
+    margin-top: 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight:700;
+  }
+  .verse-flourish{
+    font-size: 1.3rem;
+    color: var(--pink);
+    margin-bottom: 8px;
+  }
+
+  /* ---------- godparents ---------- */
+  .godparents-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    text-align:center;
+  }
+  .godparent-col-title{
+    font-family:'Caveat', cursive;
+    font-size: 1.7rem;
+    color: var(--pink-deep);
+    line-height:1;
+  }
+  .godparent-col-role{
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight:700;
+    margin: 4px 0 14px;
+  }
+  .godparent-list{ list-style:none; }
+  .godparent-list li{
+    font-weight:600;
+    font-size: 0.92rem;
+    line-height:1.4;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--blush-deep);
+  }
+  .godparent-list li:last-child{ border-bottom:none; }
+  @media (max-width: 420px){
+    .godparents-grid{ gap: 14px; }
+    .godparent-list li{ font-size: 0.82rem; }
+  }
+
+  /* ---------- notice (dress code notes) ---------- */
+  .notice{
+    max-width: 460px;
+    margin: 0 auto 50px;
+    padding: 22px 24px;
+    background: var(--blush);
+    border: 1.5px dashed var(--pink);
+    border-radius: 20px;
+    text-align:center;
+    font-size: 0.95rem;
+    line-height:1.7;
+  }
+  .notice strong{ color: var(--pink-deep); }
+  .notice .notice-thanks{
+    display:block;
+    margin-top: 8px;
+    font-family:'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--pink-deep);
+  }
+
+  /* ---------- photo carousel ---------- */
+  .carousel{
+    max-width: 400px;
+    margin: 0 auto 50px;
+    position:relative;
+  }
+  .carousel-track-wrap{
+    overflow:hidden;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px -20px rgba(217, 122, 148, 0.45);
+  }
+  .carousel-track{
+    display:flex;
+    transition: transform 0.4s ease;
+  }
+  .carousel-track img{
+    width:100%;
+    flex-shrink:0;
+    aspect-ratio: 1/1;
+    object-fit:cover;
+  }
+  .carousel-nav{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width:38px; height:38px;
+    border-radius:50%;
+    border:none;
+    background: rgba(255,255,255,0.9);
+    color: var(--pink-deep);
+    font-size: 1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow: 0 6px 14px -6px rgba(217,122,148,0.5);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .carousel-nav:hover{ background: var(--pink); color:#fff; }
+  .carousel-prev{ left: -8px; }
+  .carousel-next{ right: -8px; }
+  .carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .carousel-dot{
+    width: 8px; height:8px;
+    border-radius:50%;
+    background: var(--blush-deep);
+    border:none;
+    padding:0;
+    cursor:pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-dot.active{ background: var(--pink-deep); transform: scale(1.3); }
+
+  /* ---------- contact / inquiry note ---------- */
+  .contact-note{
+    max-width: 460px;
+    margin: 0 auto 10px;
+    text-align:center;
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity:0.85;
+    line-height:1.6;
+  }
+  .contact-note a{
+    color: var(--pink-deep);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom: 1.5px solid var(--blush-deep);
+  }
+  .contact-note a:hover{ border-color: var(--pink-deep); }
+
+  /* ---------- confetti / balloon burst ---------- */
+  #confettiCanvas{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    pointer-events:none;
+    z-index: 1000;
+  }
+
+  /* ---------- dress code color palette ---------- */
+  .palette-card{
+    max-width: 460px;
+    margin: 0 auto 50px;
+    text-align:center;
+  }
+  .palette-title{
+    font-family:'Caveat', cursive;
+    font-size: 1.8rem;
+    color: var(--pink-deep);
+    margin-bottom: 6px;
+  }
+  .palette-notice{ line-height:1.7; opacity:0.9; }
+  .palette-notice strong{ color: var(--pink-deep); }
+  .palette-thanks{
+    display:inline-block;
+    margin-top:6px;
+    font-family:'Caveat', cursive;
+    font-size:1.4rem;
+    color: var(--pink-deep);
+  }
+  .swatch-row{
+    display:flex;
+    justify-content:center;
+    gap: 14px;
+    flex-wrap:wrap;
+  }
+  .swatch{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .swatch-color{
+    width: 46px; height:46px;
+    border-radius:50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--blush-deep), 0 6px 14px -6px rgba(217,122,148,0.4);
+  }
+  .swatch-name{
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity:0.75;
+    font-weight:600;
+  }
+
+  /* ---------- loading screen ---------- */
+  #loadingScreen{
+    position:fixed;
+    inset:0;
+    z-index: 2000;
+    background: #fdeff3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 18px;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  #loadingScreen.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  .loading-flower{
+    width:34px; height:34px;
+    border:2px solid var(--blush-deep);
+    border-top-color: var(--pink-deep);
+    border-radius:50%;
+    animation: loadingSpin 1s linear infinite;
+  }
+  @keyframes loadingSpin{ to{ transform: rotate(360deg); } }
+  .loading-text{
+    font-family:'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--pink-deep);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- scroll progress indicator ---------- */
+  #scrollProgress{
+    position:fixed;
+    top:0; left:0;
+    height: 4px;
+    width: 0%;
+    background: var(--pink-deep);
+    z-index: 1500;
+    transition: width 0.1s linear;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ---------- back to top ---------- */
+  #backToTop{
+    position: fixed;
+    bottom: 26px;
+    right: 22px;
+    width: 52px; height:64px;
+    border: none;
+    background: none;
+    cursor:pointer;
+    z-index: 900;
+    opacity:0;
+    transform: translateY(20px);
+    pointer-events:none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  #backToTop.visible{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:auto;
+  }
+  #backToTop svg{ width:100%; height:100%; filter: drop-shadow(0 8px 14px rgba(217,122,148,0.4)); }
+  #backToTop:hover{ transform: translateY(-4px); }
+  #backToTop:active{ transform: translateY(0) scale(0.95); }
+
+  /* ---------- map / find us ---------- */
+  .map-card{ max-width:560px; margin:0 auto 56px; background:#fff; border:1px solid var(--blush-deep); border-radius:24px; padding:22px 20px 24px; box-shadow:0 18px 40px -20px rgba(217,122,148,0.35); }
+  .map-tabs{ display:flex; gap:10px; margin-bottom:16px; }
+  .map-tab{ flex:1; padding:11px 8px; border-radius:14px; border:1.5px solid var(--blush-deep); background:#fff8fa; font-family:'Quicksand',sans-serif; font-weight:700; font-size:0.82rem; color:var(--text); cursor:pointer; transition:all .2s; line-height:1.3; }
+  .map-tab small{ display:block; font-weight:500; font-size: 0.78rem; opacity:.75; }
+  .map-tab.active{ background:var(--pink); border-color:var(--pink); color:#fff; }
+  .map-frame{ border-radius:18px; overflow:hidden; border:3px solid #fff; box-shadow:0 0 0 2px var(--blush-deep); background:var(--lavender); }
+  .map-frame iframe{ display:block; width:100%; height:300px; border:0; }
+  .map-address{ margin-top:16px; font-weight:600; font-size:0.95rem; }
+  .map-address small{ display:block; font-weight:500; opacity:.75; font-size:0.82rem; margin-top:2px; }
+  .map-actions{ display:flex; gap:10px; margin-top:14px; }
+  .map-btn{ flex:1; display:block; padding:12px 8px; border-radius:999px; text-align:center; text-decoration:none; font-weight:700; font-size:0.88rem; transition:transform .15s; }
+  .map-btn:hover{ transform:translateY(-2px); }
+  [hidden]{ display:none !important; }
+  #rsvpCal{ margin-top:18px; }
+  .map-btn.primary{ background:var(--pink-deep); color:#fff; box-shadow:0 10px 20px -8px rgba(217,122,148,.6); }
+  .map-btn.ghost{ background:#fff8fa; color:var(--pink-deep); border:1.5px solid var(--blush-deep); }
+
+  /* ---------- godparents readability ---------- */
+  .godparents-grid{ grid-template-columns:1fr !important; gap:34px !important; }
+  .godparent-col-role{ margin-bottom:12px; }
+  .godparent-list{ display:block; max-width:300px; margin:0 auto; }
+  .godparent-list li, .godparent-list li:last-child{ background:none; border:none !important; border-bottom:1px dashed var(--blush-deep) !important; border-radius:0; padding:11px 0 !important; font-size:1rem !important; font-weight:600; line-height:1.3; text-align:center; }
+  .godparent-list li:last-child{ border-bottom:none !important; }
+  .godparents-card .godparents-grid > div + div{ border-top:none; padding-top:0; }
+  .map-note{ margin-top:12px; font-size:0.78rem; opacity:.7; text-align:center; }
+
+  /* ---------- polish overrides ---------- */
+  .section-title{ margin-top: 20px; }
+  .card, .accent-card, .notice, .carousel, .verse-card{ margin-bottom: 56px; }
+  .section-sub{ margin-bottom: 44px; }
+  .detail-row + .detail-row{ padding-top: 18px; border-top: 1px dashed var(--blush-deep); }
+  .detail-text{ min-width:0; }
+  .palette-card{ max-width:560px; padding: 40px 24px 32px; margin: 0 auto 56px; }
+  .palette-card .palette-title{ margin-bottom: 22px; }
+  .swatch-row{ gap: 10px; flex-wrap:nowrap; }
+  .swatch{ flex:1; min-width:0; }
+  .swatch-name{ font-size: 0.78rem; text-align:center; }
+  .palette-notice{ font-size:0.95rem; line-height:1.75; color:var(--text); }
+  .palette-notice strong{ color:var(--pink-deep); }
+  .accent-card.notice{ max-width:560px; padding:28px 26px; text-align:center; border:none; font-size:0.98rem; line-height:1.7; }
+  .godparents-card{ padding: 40px 18px 30px; }
+  .godparent-list li{ padding: 7px 0; }
+  .ico{ display:block; }
+  .detail-icon, .reminder-dot{ color: var(--pink-deep); }
+  .verse-flourish{ display:flex; justify-content:center; }
+
+  /* ---------- hero facts + CTA ---------- */
+  .hero-facts{ margin-top:30px; }
+  .hero-date{ font-family:'Caveat',cursive; font-size:clamp(1.8rem,6vw,2.4rem); font-weight:700; color:var(--pink-deep); line-height:1.1; }
+  .hero-meta{ margin-top:6px; font-weight:600; font-size:var(--fs-md); }
+  .countdown{ margin-top:12px; font-size:var(--fs-sm); font-weight:700; letter-spacing:0.08em; color:var(--gold); text-transform:uppercase; min-height:1.2em; }
+  .hero-cta{ display:inline-block; text-decoration:none; background:var(--pink-deep); color:#fff; font-weight:700; letter-spacing:0.05em; border-radius:999px; box-shadow:0 10px 20px -8px rgba(217,122,148,0.6); transition:transform .15s; }
+  .hero-cta{ margin-top:18px; padding:14px 38px; font-size:var(--fs-md); }
+  .hero-cta:hover{ transform:translateY(-2px); }
+  .scroll-cue{ margin-top:18px; }
+
+  /* ---------- consistency pass ---------- */
+  .content > .section-title{ margin-top:0; }
+  .card, .accent-card, .notice, .carousel, .verse-card, .map-card, .palette-card{ margin-bottom:var(--space-section) !important; }
+  .rsvp-card{ margin-bottom:var(--space-section); }
+  .detail-label, .godparent-col-role, .verse-ref, .field label{ font-size:var(--fs-xs); }
+  .swatch-row{ flex-wrap:wrap; }
+  .swatch{ flex:0 0 calc(25% - 10px); }
+
+  /* ---------- hero balance pass ---------- */
+  .opening{ min-height:100svh; padding:64px 24px 48px; }
+  /* push decoration to the background */
+  .balloon{ opacity:0.45; }
+  .flower{ opacity:0.4; }
+  .cloud{ opacity:0.4; }
+  .b3, .b4{ opacity:0.35; }
+  /* soft glow lifts the text off the decoration */
+  .opening-content{ padding:8px 4px; }
+  .opening-content:before{
+    content:''; position:absolute; inset:-48px -36px; z-index:-1; pointer-events:none;
+    background:radial-gradient(ellipse at center, rgba(255,250,252,0.92) 0%, rgba(255,250,252,0.75) 45%, rgba(255,250,252,0) 72%);
+  }
+  .eyebrow{ margin-bottom:22px; }
+  .baby-name{ margin-top:30px; line-height:1.15; }
+  .baby-name span{ margin-bottom:10px; }
+  .subline{ margin:20px auto 0; max-width:380px; line-height:1.6; font-size:1rem; }
+  .hero-divider{ width:56px; height:2px; background:var(--blush-deep); border-radius:2px; margin:30px auto 0; }
+  .hero-facts{ margin-top:26px; }
+  .hero-meta{ margin-top:8px; line-height:1.5; }
+  .countdown{ margin-top:14px; }
+  .hero-cta{ margin-top:22px; }
+  .scroll-cue{ margin-top:30px; opacity:0.75; }
+
+  @media (max-width:600px){
+    .f3, .f6, .b3, .c2{ display:none; }
+    .opening-content:before{ inset:-40px -20px; }
+  }
+
+  /* ---------- hybrid full-screen panels ---------- */
+  .content{ padding:0; }
+  .panel{
+    min-height:100vh; min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:72px 20px;
+    text-align:center;
+  }
+  .panel > *{ width:100%; }
+  .panel > :last-child{ margin-bottom:0 !important; }
+  .panel .section-title{ margin-top:0; }
+  /* when the page is short, keep spacing tight instead of stretching */
+  @media (max-height:640px){ .panel{ padding:56px 20px; } }
+
+  /* ---------- soft flat look ---------- */
+  .content{ background:var(--cream); }
+  .content:before, .opening-content:before{ display:none; }
+  .panel:nth-child(2), .panel:nth-child(6){ background:var(--blush-soft); }
+  .panel:nth-child(4), .panel:nth-child(7){ background:var(--lav-soft); }
+  .card, .rsvp-card, .map-card{ box-shadow:0 12px 32px -22px rgba(217,122,148,0.28); }
+  .rsvp-submit, .hero-cta, .map-btn.primary{ box-shadow:0 8px 18px -10px rgba(217,122,148,0.5); }
+
+  /* ---------- gentle scroll reveal ---------- */
+  .js .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1);
+    transition-delay:var(--d, 0s);
+    will-change:opacity, transform;
+  }
+  .js .reveal.in{ opacity:1; transform:none; will-change:auto; }
+  .js .reveal:not(.in){ transition-delay:0s; }
+
+  /* opening screen eases in once the loader fades */
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+  .js .opening-content > *{ animation:riseIn .7s cubic-bezier(.22,.61,.36,1) both; }
+  .js .opening-content > :nth-child(1){ animation-delay:.2s; }
+  .js .opening-content > :nth-child(2){ animation-delay:.28s; }
+  .js .opening-content > :nth-child(3){ animation-delay:.36s; }
+  .js .opening-content > :nth-child(4){ animation-delay:.44s; }
+  .js .opening-content > :nth-child(5){ animation-delay:.52s; }
+  .js .opening-content > :nth-child(6){ animation-delay:.6s; }
+  .js .opening-content > :nth-child(7){ animation-delay:.68s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .js .reveal{ opacity:1; transform:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *:before, *:after{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    .petal-fall{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loadingScreen">
+  <div class="loading-flower"></div>
+  <div class="loading-text">opening your invitation...</div>
+</div>
+
+<div id="scrollProgress"></div>
+
+<button type="button" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 60 76" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="30" cy="30" rx="26" ry="30" fill="#e89bb0"/>
+    <ellipse cx="22" cy="20" rx="8" ry="10" fill="#ffffff" opacity="0.25"/>
+    <line x1="30" y1="60" x2="30" y2="74" stroke="#6b4a55" stroke-width="1.5" opacity="0.5"/>
+    <path d="M22 34 L30 24 L38 34" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<!-- ================= OPENING ================= -->
+<section class="opening">
+  <div class="clouds">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+  </div>
+
+  <div class="balloon b1"></div>
+  <div class="balloon b2"></div>
+  <div class="balloon b3"></div>
+  <div class="balloon b4"></div>
+
+  <!-- css flowers -->
+  <div class="flower f1">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower small lav f2">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower blush f3">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower small f4">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower lav small f5">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower blush f6">
+    <div class="petal" style="transform:rotate(0deg)"></div>
+    <div class="petal" style="transform:rotate(72deg)"></div>
+    <div class="petal" style="transform:rotate(144deg)"></div>
+    <div class="petal" style="transform:rotate(216deg)"></div>
+    <div class="petal" style="transform:rotate(288deg)"></div>
+    <div class="center"></div>
+  </div>
+
+  <div class="opening-content">
+    <div class="eyebrow">A Little Blessing</div>
+    <div class="invited">You're Invited</div>
+    <div class="baby-name">
+      <span>To The Baptism &amp; First Birthday Of</span>
+      Sayzha Kate C. Angel
+    </div>
+    <p class="subline">Please join us as we celebrate her tiny heart being welcomed into faith</p>
+
+    <div class="hero-divider" aria-hidden="true"></div>
+
+    <div class="hero-facts">
+      <div class="hero-date">Monday, January 18, 2027</div>
+      <div class="hero-meta">10:30 AM &middot; St. William's Cathedral, Laoag City</div>
+      <div class="countdown" id="countdown" aria-live="polite"></div>
+      <a class="hero-cta" href="#rsvp">RSVP Now</a>
+    </div>
+
+    <button type="button" class="scroll-cue" id="scrollCueBtn" aria-label="Scroll to event details">
+      See details
+      <div class="arrow"></div>
+    </button>
+  </div>
+</section>
+
+<!-- ================= CONTENT ================= -->
+<section class="content" id="content">
+  <div class="panel">
+  <div class="section-title">Our Little Angel's Big Day</div>
+  <div class="section-sub">Baptism &amp; First Birthday</div>
+
+  <div class="card">
+    <div class="desc-text">
+      <span class="lead">With hearts full of joy...</span>
+      We invite you to witness Sayzha Kate being welcomed into our faith family through the sacrament of christening as we also celebrate her first birthday.
+      <br><br>
+      It’s a special day filled with love, blessings, laughter, and beautiful memories. We would be truly happy to have you join us in celebrating these two precious milestones.
+      <br><br>
+      Let’s make this day even more memorable with treats, giggles, and lots of cuddles!
+    </div>
+  </div>
+
+  <div class="verse-card">
+    <div class="verse-flourish"><svg viewBox="0 0 120 24" width="120" height="24" fill="none" stroke="#e89bb0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h42M76 12h42"/><path d="M12 3l1.8 7.2L21 12l-7.2 1.8L12 21l-1.8-7.2L3 12l7.2-1.8z" transform="translate(48 0)"/></svg></div>
+    <div class="verse-text">"Let the little children come to me, and do not hinder them, for the kingdom of God belongs to such as these."</div>
+    <div class="verse-ref">Mark 10:14</div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="card">
+    <div class="details-grid">
+      <div class="detail-row">
+        <div class="detail-icon"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></div>
+        <div class="detail-text">
+          <div class="detail-label">Date</div>
+          <div class="detail-value">Monday, January 18, 2027</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+        <div class="detail-text">
+          <div class="detail-label">Ceremony Time</div>
+          <div class="detail-value">10:30 AM
+            <small>Ceremony begins promptly, kindly arrive a little early</small>
+          </div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5v4M10.2 4.3h3.6"/><path d="M5 21v-9l7-5 7 5v9z"/><path d="M10 21v-4.5a2 2 0 0 1 4 0V21"/></svg></div>
+        <div class="detail-text">
+          <div class="detail-label">Ceremony</div>
+          <div class="detail-value">St. William's Cathedral 
+            <small>Barangay 15, Laoag City</small>
+          </div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+        <div class="detail-text">
+          <div class="detail-label">Celebration Time</div>
+          <div class="detail-value">12:00 PM
+            <small>Reception follows right after the ceremony</small>
+          </div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="9.5" rx="5.5" ry="6.5"/><path d="M12 16v2.2c0 1.8-1.6 2-1.6 3.8"/></svg></div>
+        <div class="detail-text">
+          <div class="detail-label">Celebration To Follow</div>
+          <div class="detail-value">Siudad de Yloco
+            <small>Soliman Street, Barangay 29, right after the ceremony</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider" style="margin:26px auto 20px;"></div>
+    <div class="map-actions">
+      <a class="map-btn primary" data-cal="google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="section-title">Finding Us</div>
+  <div class="section-sub">Ceremony &amp; Celebration</div>
+  <div class="map-card">
+    <div class="map-tabs" role="tablist">
+      <button type="button" class="map-tab active" data-venue="ceremony" role="tab">Ceremony<small>St. William's Cathedral</small></button>
+      <button type="button" class="map-tab" data-venue="celebration" role="tab">Celebration<small>Siudad de Yloco</small></button>
+    </div>
+    <div class="map-frame">
+      <iframe id="mapFrame" title="Venue map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+        src="https://maps.google.com/maps?q=St.+William%27s+Cathedral,+Laoag+City,+Ilocos+Norte&amp;output=embed"></iframe>
+    </div>
+    <div class="map-address" id="mapAddress">St. William's Cathedral<small>Barangay 15, Laoag City &middot; 10:30 AM</small></div>
+    <div class="map-actions">
+      <a class="map-btn primary" id="mapOpen" href="https://www.google.com/maps/search/?api=1&amp;query=St.+William%27s+Cathedral,+Laoag+City,+Ilocos+Norte" target="_blank" rel="noopener">Open in Maps</a>
+      <a class="map-btn ghost" id="mapDirections" href="https://www.google.com/maps/dir/?api=1&amp;destination=St.+William%27s+Cathedral,+Laoag+City,+Ilocos+Norte" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+    <div class="map-note">Map not showing? Tap "Open in Maps" above.</div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="accent-card pink">
+    <div class="reminders-title">A Few Sweet Reminders</div>
+    <div class="reminder-item">
+      <div class="reminder-dot"><svg class="ico" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 3L3 6l2.5 4L8 9v12h8V9l2.5 1L21 6l-5.5-3c-.4 1.6-2 2.5-3.5 2.5S8.9 4.6 8.5 3z"/></svg></div>
+      <div>Come dressed in our colors of the day. They'll make the photos extra pretty!</div>
+    </div>
+    <div class="reminder-item">
+      <div class="reminder-dot"><svg class="ico" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2.5h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+      <div>Snap a few photos and tag us. We'd love to relive the day through your eyes!</div>
+    </div>
+    <div class="reminder-item">
+      <div class="reminder-dot"><svg class="ico" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M3 7h18v3H3zM12 7v13M12 7c-1-3.5-5-3-4.2-.5M12 7c1-3.5 5-3 4.2-.5"/></svg></div>
+      <div>Your presence is the only present we need. Gifts are truly optional.</div>
+    </div>
+    <div class="reminder-item">
+      <div class="reminder-dot"><svg class="ico" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7.5L12 13.5l8.5-6"/></svg></div>
+      <div>Kindly RSVP below by December 20th so we can plan the little details.</div>
+    </div>
+  </div>
+
+  <div class="card palette-card">
+    <div class="palette-title">Our Colors For The Day</div>
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#e89bb0;"></div>
+        <div class="swatch-name">Blush Pink</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#efe3f3;"></div>
+        <div class="swatch-name">Soft Lavender</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f4c6d3;"></div>
+        <div class="swatch-name">Rose Cream</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#fffaf6; box-shadow: 0 0 0 2px var(--blush-deep), 0 6px 14px -6px rgba(217,122,148,0.4);"></div>
+        <div class="swatch-name">Ivory</div>
+      </div>
+    </div>
+    <div class="divider" style="margin:26px auto 22px;"></div>
+    <div class="palette-notice">Please be informed that the dress code in the reception will be <strong>STRICTLY FOLLOWED</strong>. All guests are kindly requested to wear the prescribed attire in accordance with the event's dress code.<br><br><span class="palette-thanks">Thank you for your cooperation!</span></div>
+    <div class="divider" style="margin:24px auto 20px;"></div>
+    <div class="palette-notice"><strong>Ninong &amp; Ninang:</strong> please wear <strong>white tops</strong> during the church ceremony. Thank you for helping us make her big day picture-perfect.</div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="section-title">Her Guiding Lights</div>
+  <div class="section-sub">Ninong &amp; Ninang</div>
+  <div class="card godparents-card">
+    <div class="godparents-grid">
+      <div>
+        <div class="godparent-col-title">Ninong</div>
+        <div class="godparent-col-role">Godfathers</div>
+        <ul class="godparent-list">
+          <li>Christian Maoirat</li>
+          <li>Ian Lagazo</li>
+          <li>Jeanel Silvestre</li>
+          <li>Jhaylen Viñas</li>
+          <li>John Michael Sahagun</li>
+          <li>Joshua Brent Uy</li>
+          <li>Jovrick Dela Cruz</li>
+          <li>Jul Emmanuel Dela Cruz</li>
+          <li>Justin Dancel</li>
+          <li>Kurt Nabiong</li>
+          <li>Lanz Jacinto</li>
+          <li>Morian Baccay</li>
+          <li>Spencer Ballesteros</li>
+        </ul>
+      </div>
+      <div>
+        <div class="godparent-col-title">Ninang</div>
+        <div class="godparent-col-role">Godmothers</div>
+        <ul class="godparent-list">
+          <li>Almeia Agacid</li>
+          <li>Angela Crisostomo</li>
+          <li>April Labao</li>
+          <li>Bea Sair</li>
+          <li>Bernadine Fuerte</li>
+          <li>Mhiseah Clemente</li>
+          <li>Nicole Mercado</li>
+          <li>Princess Zhaira Cala</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="section-title">Sweet Little Moments</div>
+  <div class="section-sub">Gallery</div>
+  <div class="carousel">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="https://placehold.co/500x500/fbe4e9/d97a94?text=Photo+1" alt="Replace with baby photo">
+        <img src="https://placehold.co/500x500/efe3f3/d97a94?text=Photo+2" loading="lazy" decoding="async" alt="Replace with baby photo">
+        <img src="https://placehold.co/500x500/f4c6d3/d97a94?text=Photo+3" loading="lazy" decoding="async" alt="Replace with baby photo">
+        <img src="https://placehold.co/500x500/f4c6d3/d97a94?text=Photo+4" loading="lazy" decoding="async" alt="Replace with baby photo">
+        <img src="https://placehold.co/500x500/efe3f3/d97a94?text=Photo+5" loading="lazy" decoding="async" alt="Replace with baby photo">
+        <img src="https://placehold.co/500x500/fbe4e9/d97a94?text=Photo+6" loading="lazy" decoding="async" alt="Replace with baby photo">
+      </div>
+    </div>
+    <button type="button" class="carousel-nav carousel-prev" id="carouselPrev" aria-label="Previous photo">‹</button>
+    <button type="button" class="carousel-nav carousel-next" id="carouselNext" aria-label="Next photo">›</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+
+  </div>
+
+  <div class="panel">
+  <div class="section-title" id="rsvp">Kindly RSVP</div>
+  <div class="section-sub">We Can't Wait To See You</div>
+
+  <div class="contact-note">
+    Have a question about the event? Message us anytime at<br>
+    <a href="mailto:family@example.com">family@example.com</a> or
+    <a href="https://m.me/yourfamilypage" target="_blank" rel="noopener">Messenger</a>
+  </div>
+
+  <div class="rsvp-card">
+    <div class="rsvp-title">Will You Join Us?</div>
+    <div class="rsvp-sub">Please let us know by December 20th</div>
+
+    <form id="rsvpForm">
+      <!-- Honeypot: real visitors never see or fill this. Bots often do. -->
+      <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="familyName">Family Name</label>
+        <input type="text" id="familyName" placeholder="e.g. The Ligot Family" required>
+      </div>
+
+      <div class="field">
+        <label for="guestEmail">Email</label>
+        <input type="email" id="guestEmail" placeholder="you@email.com" autocomplete="email" required>
+        <div class="field-hint">Your confirmation will be sent here. Please check your <strong>Spam or Junk folder</strong> if you don't see it.</div>
+      </div>
+
+
+      <div class="field">
+        <label>Are You Coming?</label>
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" data-value="Yes">Yes</button>
+          <button type="button" class="toggle-btn" data-value="No">No</button>
+        </div>
+      </div>
+
+      <div class="field" id="guestsField">
+        <label for="guestCount">Number Of Guests (Including You)</label>
+        <div class="stepper">
+          <button type="button" class="stepper-btn" id="guestMinus">−</button>
+          <span class="stepper-value" id="guestCount">1</span>
+          <button type="button" class="stepper-btn" id="guestPlus">+</button>
+        </div>
+      </div>
+
+      <button type="submit" class="rsvp-submit" id="submitBtn">Send RSVP</button>
+      <div class="rsvp-status" id="rsvpStatus"></div>
+      <div class="map-actions" id="rsvpCal" hidden>
+        <a class="map-btn primary" data-cal="google" href="#" target="_blank" rel="noopener">Google Calendar</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="footer-note">With all our love,</div>
+  <div class="footer-sub">Mommy, Daddy & Sayzha Kate</div>
+  </div>
+</section>
+
+<canvas id="confettiCanvas"></canvas>
+
+<script>
+  // ============================================================
+  // LOADING SCREEN: hide once page has fully loaded
+  // ============================================================
+  (function loadingScreen(){
+    const screen = document.getElementById('loadingScreen');
+    function hide(){
+      screen.classList.add('hidden');
+      setTimeout(() => screen.remove(), 450);
+    }
+    if (document.readyState === 'complete'){
+      setTimeout(hide, 200);
+    } else {
+      window.addEventListener('load', () => setTimeout(hide, 200));
+    }
+  })();
+
+  // ============================================================
+  // SCROLL PROGRESS INDICATOR + BACK TO TOP BUTTON
+  // ============================================================
+  (function scrollProgressAndBackToTop(){
+    const progressBar = document.getElementById('scrollProgress');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    function onScroll(){
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      backToTopBtn.classList.toggle('visible', scrollTop > window.innerHeight * 0.6);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  // ============================================================
+  // ENTRANCE ANIMATION: gentle falling petals on page load
+  // ============================================================
+  (function fallingPetals(){
+    const colors = ['#e89bb0', '#f4c6d3', '#cfa8d8'];
+    const petalCount = 18;
+    for (let i = 0; i < petalCount; i++){
+      const petal = document.createElement('div');
+      petal.className = 'petal-fall';
+      const size = 10 + Math.random() * 10;
+      const left = Math.random() * 100;
+      const duration = 6 + Math.random() * 5;
+      const delay = Math.random() * 3;
+      const drift = (Math.random() * 80 - 40) + 'px';
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      petal.style.left = left + 'vw';
+      petal.style.width = size + 'px';
+      petal.style.height = size + 'px';
+      petal.style.setProperty('--drift', drift);
+      petal.style.animationDuration = duration + 's';
+      petal.style.animationDelay = delay + 's';
+      petal.innerHTML = `<svg viewBox="0 0 20 20"><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0 Z" fill="${color}"/></svg>`;
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), (duration + delay) * 1000 + 500);
+    }
+  })();
+
+  // ============================================================
+  // PHOTO CAROUSEL
+  // ============================================================
+  (function photoCarousel(){
+    const track = document.getElementById('carouselTrack');
+    const dotsWrap = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const slides = track.children.length;
+    let index = 0;
+    let autoTimer;
+
+    for (let i = 0; i < slides; i++){
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+    const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+    function goTo(i){
+      index = (i + slides) % slides;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+
+    function startAuto(){
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(index + 1), 4000);
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(index - 1); startAuto(); });
+    nextBtn.addEventListener('click', () => { goTo(index + 1); startAuto(); });
+
+    // basic swipe support
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive:true });
+    track.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 40) goTo(index - 1);
+      else if (diff < -40) goTo(index + 1);
+      startAuto();
+    });
+
+    startAuto();
+  })();
+
+  // ============================================================
+  // CONFETTI + BALLOON BURST (played after a successful RSVP)
+  // ============================================================
+  function celebrateRSVP(){
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#e89bb0', '#f4c6d3', '#efe3f3', '#d9a86c', '#cfa8d8'];
+    const particles = [];
+
+    for (let i = 0; i < 90; i++){
+      particles.push({
+        type: 'confetti',
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * canvas.height * 0.3,
+        w: 6 + Math.random() * 6,
+        h: 8 + Math.random() * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: 2 + Math.random() * 3,
+        vx: (Math.random() - 0.5) * 2,
+        rotation: Math.random() * 360,
+        vr: (Math.random() - 0.5) * 10
+      });
+    }
+    for (let i = 0; i < 6; i++){
+      particles.push({
+        type: 'balloon',
+        x: 40 + Math.random() * (canvas.width - 80),
+        y: canvas.height + 40 + Math.random() * 200,
+        r: 18 + Math.random() * 10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: -(1.5 + Math.random() * 1.5),
+        vx: (Math.random() - 0.5) * 0.8,
+        sway: Math.random() * Math.PI * 2
+      });
+    }
+
+    let frame = 0;
+    const maxFrames = 260;
+
+    function draw(){
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        if (p.type === 'confetti'){
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rotation += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        } else {
+          p.sway += 0.05;
+          p.x += p.vx + Math.sin(p.sway) * 0.6;
+          p.y += p.vy;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.r * 0.8, p.r, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(107,74,85,0.35)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(0, p.r);
+          ctx.lineTo(0, p.r + 22);
+          ctx.stroke();
+          ctx.restore();
+        }
+      });
+
+      if (frame < maxFrames){
+        requestAnimationFrame(draw);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+    draw();
+  }
+
+  // ============================================================
+  // GOOGLE APPS SCRIPT URL (sends the confirmation email + saves to
+  // a Google Sheet). See rsvp-apps-script.gs for the 5-minute setup.
+  // Paste the Web app URL between the quotes.
+  // ============================================================
+  const APPS_SCRIPT_URL = "";
+
+  (function venueMap(){
+    const venues = {
+      ceremony:{ q:"St. William's Cathedral, Laoag City, Ilocos Norte", name:"St. William's Cathedral", sub:"Barangay 15, Laoag City \u00b7 10:30 AM" },
+      celebration:{ q:"Siudad de Yloco, Soliman Street, Laoag City, Ilocos Norte", name:"Siudad de Yloco", sub:"Soliman Street, Barangay 29 \u00b7 12:00 PM" }
+    };
+    const frame = document.getElementById('mapFrame');
+    const addr = document.getElementById('mapAddress');
+    const open = document.getElementById('mapOpen');
+    const dir = document.getElementById('mapDirections');
+    document.querySelectorAll('.map-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const v = venues[tab.dataset.venue];
+        const q = encodeURIComponent(v.q);
+        document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        frame.src = 'https://maps.google.com/maps?q=' + q + '&output=embed';
+        open.href = 'https://www.google.com/maps/search/?api=1&query=' + q;
+        dir.href = 'https://www.google.com/maps/dir/?api=1&destination=' + q;
+        addr.innerHTML = v.name + '<small>' + v.sub + '</small>';
+      });
+    });
+  })();
+
+  // Countdown
+  (function countdown(){
+    const el = document.getElementById('countdown');
+    const target = new Date('2027-01-18T10:30:00+08:00');
+    function tick(){
+      const diff = target - new Date();
+      if (diff <= 0){ el.textContent = "It's today!"; return; }
+      const d = Math.floor(diff / 86400000);
+      el.textContent = d === 0 ? "It's almost time!" : d + (d === 1 ? ' day' : ' days') + ' to go';
+    }
+    tick(); setInterval(tick, 3600000);
+
+  })();
+
+  // ============================================================
+  // Smooth in-page anchor scrolling (e.g. "RSVP Now")
+  // ============================================================
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.getElementById('scrollCueBtn').addEventListener('click', () => {
+    document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ============================================================
+  // ADD TO GOOGLE CALENDAR
+  // Edit the details here if the plan changes. Times are UTC:
+  // 10:30 AM PHT = 02:30Z, 2:00 PM PHT = 06:00Z.
+  // ============================================================
+  const EVENT = {
+    title: "Sayzha Kate's Baptism & First Birthday",
+    start: "20270118T023000Z",
+    end:   "20270118T060000Z",
+    location: "St. William's Cathedral, Barangay 15, Laoag City",
+    details: "Ceremony 10:30 AM at St. William's Cathedral. Celebration at 12:00 PM at Siudad de Yloco, Soliman Street, Barangay 29, Laoag City."
+  };
+
+  const googleCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text=" + encodeURIComponent(EVENT.title)
+    + "&dates=" + EVENT.start + "/" + EVENT.end
+    + "&details=" + encodeURIComponent(EVENT.details)
+    + "&location=" + encodeURIComponent(EVENT.location);
+
+  document.querySelectorAll('[data-cal="google"]').forEach(a => { a.href = googleCalUrl; });
+
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const guestsField = document.getElementById('guestsField');
+  let comingValue = "Yes";
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      comingValue = btn.dataset.value;
+      guestsField.classList.toggle('guests-hidden', comingValue === "No");
+    });
+  });
+
+  const guestCountEl = document.getElementById('guestCount');
+  const guestMinus = document.getElementById('guestMinus');
+  const guestPlus = document.getElementById('guestPlus');
+  const MIN_GUESTS = 1;
+  const MAX_GUESTS = 20;
+  let guestCount = 1;
+
+  function updateGuestButtons(){
+    guestMinus.disabled = guestCount <= MIN_GUESTS;
+    guestPlus.disabled = guestCount >= MAX_GUESTS;
+  }
+
+  guestMinus.addEventListener('click', () => {
+    if (guestCount > MIN_GUESTS) {
+      guestCount--;
+      guestCountEl.textContent = guestCount;
+      updateGuestButtons();
+    }
+  });
+
+  guestPlus.addEventListener('click', () => {
+    if (guestCount < MAX_GUESTS) {
+      guestCount++;
+      guestCountEl.textContent = guestCount;
+      updateGuestButtons();
+    }
+  });
+
+  updateGuestButtons();
+
+  const form = document.getElementById('rsvpForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusEl = document.getElementById('rsvpStatus');
+  const RSVP_LOCK_KEY = "baptismRsvpSubmitted";
+
+  function lockForm(message){
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Already Sent";
+    statusEl.textContent = message;
+    statusEl.className = "rsvp-status ok";
+    form.querySelectorAll('input, button.toggle-btn, button.stepper-btn').forEach(el => {
+      if (el !== submitBtn) el.disabled = true;
+    });
+  }
+
+  if (localStorage.getItem(RSVP_LOCK_KEY) === "true") {
+    lockForm("You've already RSVP'd. Thank you!");
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (localStorage.getItem(RSVP_LOCK_KEY) === "true") {
+      return;
+    }
+
+    // Honeypot check: if this hidden field got filled in, it's a bot.
+    const honeypot = document.getElementById('website').value.trim();
+    if (honeypot !== "") {
+      // Silently pretend it worked so bots don't learn anything.
+      statusEl.textContent = "Thank you! Your RSVP has been sent";
+      statusEl.className = "rsvp-status ok";
+      form.reset();
+      return;
+    }
+
+    if (!APPS_SCRIPT_URL) {
+      statusEl.textContent = "RSVP isn't set up yet. Ask the site owner to finish setup.";
+      statusEl.className = "rsvp-status err";
+      return;
+    }
+
+    const familyName = document.getElementById('familyName').value.trim();
+    const email = document.getElementById('guestEmail').value.trim();
+    const guestsToSend = comingValue === "Yes" ? guestCount : 0;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+    statusEl.textContent = "";
+    statusEl.className = "rsvp-status";
+
+    // no-cors: the browser can't read Apps Script's reply, but the request still arrives.
+    const sends = [fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ familyName, email, attending: comingValue, guests: guestsToSend, website: "" })
+    })];
+
+    try {
+      await Promise.all(sends);
+      const doneMsg = "Thank you! Your RSVP has been sent. A confirmation email is on its way. If you don't see it, please check your Spam folder.";
+      localStorage.setItem(RSVP_LOCK_KEY, "true");
+      if (comingValue === "Yes") document.getElementById('rsvpCal').hidden = false;
+      celebrateRSVP();
+      form.reset();
+      lockForm(doneMsg);
+    } catch (err) {
+      statusEl.textContent = "Something went wrong, please try again.";
+      statusEl.className = "rsvp-status err";
+    } finally {
+      if (localStorage.getItem(RSVP_LOCK_KEY) !== "true") {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send RSVP";
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
